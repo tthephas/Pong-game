@@ -29,12 +29,29 @@ I want to be able to ...
 
 **Screenshots**
 
+### Game play 
 ![Screenshot 2022-12-22 at 4 28 23 PM](https://user-images.githubusercontent.com/47870092/209236385-b183e761-10d9-4339-8cd3-f534f9705db7.png)
 
 
 ![Screenshot 2022-12-22 at 4 33 23 PM](https://user-images.githubusercontent.com/47870092/209236895-9038c6eb-334d-4faf-80d9-ac98c78c5ad9.png)
 
 
+### Start Screen
+
 ![Screenshot 2022-12-22 at 4 40 08 PM](https://user-images.githubusercontent.com/47870092/209237524-5161782a-4f0f-4e0c-9851-997d7b2129c0.png)
+
+### Game over screen
+
+![Screenshot 2022-12-22 at 4 47 23 PM](https://user-images.githubusercontent.com/47870092/209238272-854d6b2e-b13e-4573-bea9-936c949a0e6b.png)
+
+
+### Level, score, lives left (bonus feature)
+
+![Screenshot 2022-12-22 at 4 51 38 PM](https://user-images.githubusercontent.com/47870092/209238689-a37a4993-7f82-44d2-a501-df22251bb54b.png)
+
+
+### Ball speed, paddle size, extra ball (bonus feature)
+
+![Screenshot 2022-12-22 at 4 56 28 PM](https://user-images.githubusercontent.com/47870092/209239080-9749613f-8d77-4d39-92f2-bf02009c8ee6.png)
 
 
