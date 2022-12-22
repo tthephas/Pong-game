@@ -54,4 +54,24 @@ I want to be able to ...
 
 ![Screenshot 2022-12-22 at 4 56 28 PM](https://user-images.githubusercontent.com/47870092/209239080-9749613f-8d77-4d39-92f2-bf02009c8ee6.png)
 
+**Technical Requirements**
+
+- Javascript
+-   Canvas tags
+- HTML
+- CSS
+
+
+**Approachs taken**
+- Build out game board with space for the game play, scoreboard, message board (HTML)
+- Build out CSS styling for visual appeal. Make sure ball and paddle are clear for User Experience
+- Use Javascript to control gameplay, scoreboard changes, screen changes for starting and ending screens
+- Make ball bounce visually realistic although edges might not seem to touch paddles 
+- *Possible Bonus features*
+-   Create a level board for user to see what game changes happen when difficulty increases
+-   Create different bouncing features, possibly random, to simulate real bouncing or erratic bouncing for difficulty increases
+-   Create a local scoring system so user can track their all time scores and high scores
+-   Create a real computer player at top of screen that increases in difficulty to beat (a second paddle)
+
+
 
