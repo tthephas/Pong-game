@@ -15,3 +15,7 @@
 // Grab some HTML elements for reference. Name them properly!!
 
 const gameBoard = document.getElementById('canvas')
+/// This will go away or disappear. Only here now to help track movement during game build. See the X Y coordinates in real time.
+const movement = document.getElementById('movement')
+// Create a status box. This will be a box to show messages. Example, you win, you lose, good luck. 
+const message = document.getElementById('message')
