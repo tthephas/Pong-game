@@ -157,5 +157,78 @@ class Ball {
     }
 }
 
-//  Ball should start at same spot each game. Probably top middle is good. But can be left or right too.
+/////////     PLACE BALL AND PADDLE TO START  /////////
+
+// Ball should start at same spot each game. Probably top middle is good. But can be left or right too.
+// Paddle should start bottom middle, need to find those pixels 
+
+const player = new Paddle(350, 350, 75, 25, white)
+const ballOne = new Ball(350, 50, 25, 25, white)
+
+player.render()
+ballOne.render()
+
+
+/////    COLLISION  DETECTION ///////////
+
+
+// Detect a hit. In pong, the ball can hit any side. if it hits the bottom, the player loses. if it hits the paddle or any other side, the ball bounces
+// To do this we need to account for the entire space that the ball takes up AND the paddle takes up. The sides should be similar but easier its its not a moving object
+// Use the ball AND paddle x, y, width, height
+
+const detectHit = (thing) => {
+    //Use a big if statement to see if any side of the ball hits any side of the paddle or walls.
+    if (ballOne.x < thing.x + thing.width
+        && ballOne.x + ballOne.width > thing.x
+        && ballOne.y < thing.y + thing.height
+        && ballOne.y + ballOne.height > thing.y) {
+        //use for testing only
+        // console.log('hit!')
+
+        //////// dont need this for now. no one is dying. but will need something later if ball hits bottom of screen to trigger game end
+        //ogre disappears b/c of the render function in game loop
+        //thing.alive = false
+        //change the status box
+        message.textContent = 'Ball hit paddle/wall'
+    } 
+}
+
+
+
+///////   GAME LOOP   //////////////
+
+// Player and paddle will start in static spot. When hit START button, player starts moving. For testing, will either manually move or have moving from start.
+// Setup game loop function, attached to an interval. will use same interval as canvas crawler to begin. Will simulate animation on screen
+
+const gameLoop = () => {
+    //no console logs here if you can avoid it
+    //for testing ok, but not in final
+    console.log('its working')
+    
+    // To resemble real movement, clear board every loop so that it doesnt look like a snake and keep showing previous move. Simulates moving with no tracks
+    ctx.clearRect(0, 0, gameBoard.width, gameBoard.height)
+
+
+    ////  LEAVE FOR NOW FOR TESTING PURPOSES ////
+    
+    // Will need a hit detector later only for bottom of screen. When ball passes paddle, player loses. When ball hits paddle, it bounces off it.
+
+    // Hit detector at top so it takes precedence
+    if (ogre.alive) {
+        ogre.render()
+        detectHit(ogre)
+    } else if (ogre2.alive) {
+        message.textContent = "Now kill shrek 2"
+        ogre2.render()
+        detectHit(ogre2)
+    } else { 
+        message.textContent = "you win!"
+        stopGameLoop
+    }
+
+
+    player.render()
+    player.movePlayer()
+    movement.textContent = `${player.x}, ${player.y}`
+}
 
