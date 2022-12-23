@@ -12,4 +12,6 @@
 
 //////////// SETUP COMPONENTS ///////////////
 
-//
+// Grab some HTML elements for reference. Name them properly!!
+
+const gameBoard = document.getElementById('canvas')
