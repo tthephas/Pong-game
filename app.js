@@ -13,21 +13,22 @@
 //////////// SETUP COMPONENTS ///////////////
 
 // Grab some HTML elements for reference. Name them properly!!
-
 const gameBoard = document.getElementById('canvas')
 /// This will go away or disappear. Only here now to help track movement during game build. See the X Y coordinates in real time.
 const movement = document.getElementById('movement')
 // Create a status box. This will be a box to show messages. Example, you win, you lose, good luck. 
 const message = document.getElementById('message')
 
+//// TEST ONLY ////
 //Testing a message in message box works. Can use innerText
 //message.innerText ="hi is this working"
+//// TEST ONLY ////
+
 
 // Set the game context to 2D
 // Save it to a variable to reference later. Using CTX
 // Tells code to work within the context of the canvas
 const ctx = gameBoard.getContext('2d')
-
 
 // Reminders about coordinates. Top left x,y coordinates, are 0,0. Bottom right will flex with the window, but are found thru ctx.w for width and ctx.h for height.
 // Will need the computed size of the canvas. Will refer to that later.
@@ -36,6 +37,7 @@ const ctx = gameBoard.getContext('2d')
 
 ////////////    SETUP  ////////////////
 
+// maybe this was for screen sizing changes? 
 gameBoard.setAttribute('width', getComputedStyle(gameBoard)['width'])
 gameBoard.setAttribute('height', getComputedStyle(gameBoard)['height'])
 // Sizes the board somehow
@@ -68,7 +70,6 @@ class Paddle {
 
         // Need this for paddle only i think, due to pressing button
 
-
         // Methods tied to key events
         // This sets direction for paddle to go that way
         // All four for now, but up down dropped later
@@ -84,19 +85,10 @@ class Paddle {
             if (key == 'ArrowRight') { this.direction.right = false}
         }        
 
-
-
         //Movement handler. 
-        // Gives the paddle direction properties. Can probably drop up and down later on. Only need left and right.
+        // Gives the paddle direction properties. Only need left and right.
         this.movePlayer = function () {
             //send guy moving in dirx that is true
-            if (this.direction.up) {
-                this.y -= this.speed
-                // Wall off the sides of the canvas
-                if (this.y <= 0) {
-                    this.y = 0
-                }
-            }
             if (this.direction.left) {
                 this.x -= this.speed
                 if (this.x <= 0) {
@@ -104,12 +96,6 @@ class Paddle {
                 }
             }
             //Account for the size of the paddle on left and right side
-            if (this.direction.down) {
-                this.y += this.speed
-                if (this.y + this.height >= gameBoard.height) {
-                    this.y = gameBoard.height - this.height
-                }
-            }
             if (this.direction.right) {
                 this.x += this.speed
                 if (this.x + this.width >= gameBoard.width) {
@@ -132,7 +118,7 @@ class Ball {
         this.width = width
         this.height = height
         this.color = color
-        // Property to help with moving
+        // Property to help with moving. Reminder that paddle is 35 now.
         this.speed = 15
         // Add directions. The ball can move all directions.
         this.direction = {
@@ -192,7 +178,7 @@ class Ball {
                 }
             }
         }
-        // This puts a player on board to start
+        // This puts a ball on board to start
         this.render = function () {
             ctx.fillStyle = this.color
             ctx.fillRect(this.x, this.y, this.width, this.height)
@@ -210,6 +196,7 @@ class Ball {
 const player = new Paddle(360, 335, 165, 8, 'black')
 const ballOne = new Ball(400, 50, 25, 15, 'black')
 
+// this was for testing only
 // player.render()
 // ballOne.render()
 
@@ -246,9 +233,10 @@ const detectHit = (thing) => {
 // Setup game loop function, attached to an interval. will use same interval as canvas crawler to begin. Will simulate animation on screen
 
 const gameLoop = () => {
+    //////////TEST ONLY/////////
     //no console logs here if you can avoid it
-    //for testing ok, but not in final
     //console.log('its working')
+    ////////// TEST ONLY ////////////
     
     // To resemble real movement, clear board every loop so that it doesnt look like a snake and keep showing previous move. Simulates moving with no tracks
     ctx.clearRect(0, 0, gameBoard.width, gameBoard.height)
@@ -256,27 +244,20 @@ const gameLoop = () => {
 
     ////  LEAVE FOR NOW FOR TESTING PURPOSES ////
     
-    // Will need a hit detector later only for bottom of screen. When ball passes paddle, player loses. When ball hits paddle, it bounces off it.
+    // Will need a hit detector later only for bottom of screen. When ball passes paddle, player loses. When ball hits paddle, it bounces off it.    
+    // Hit detector at top so it takes precedence
+    // This works at least now for messaging. need to stop it at paddle. message if hit bottom. more things if hit bottom. also bounce it. 
+    detectHit(player)
 
-    // mess with thsi later. not sure i need ///////
-    // // Hit detector at top so it takes precedence
-    // if (ogre.alive) {
-    //     ogre.render()
-    //     detectHit(ogre)
-    // } else if (ogre2.alive) {
-    //     message.textContent = "Now kill shrek 2"
-    //     ogre2.render()
-    //     detectHit(ogre2)
-    // } else { 
-    //     message.textContent = "you win!"
-    //     stopGameLoop
-    // }
-
+    ////////   ALOT MORE TO DO HERE  ////////
 
     player.render()
     player.movePlayer()
     movement.textContent = `${player.x}, ${player.y}`
     ballOne.render()
+    ballOne.movePlayer()
+    //NEED TO BUILD OUT A ballOne.moveBall()
+
 }
 
 ///////////    EVENT LISTENERS   //////////////
@@ -286,30 +267,40 @@ const gameLoop = () => {
 document.addEventListener('keydown', (e) => {
     // when a key is pressed, set the direction
     player.setDirection(e.key)
+
+    /// try to add ball here for testing
+    ballOne.setDirection(e.key)
 })
 
-/// One key vent for a key UP
-// This will stop the paddle from moving
+/// One key event for a key UP. For paddle only
+// This will stop the paddle from moving, or the wall does. 
 document.addEventListener('keyup', (e) => {
     // when a key is pressed, unset the direction
     /// handled slightly different
     if(['ArrowLeft', 'ArrowRight'].includes(e.key)) {
         player.unsetDirection(e.key)
     }
+
+    /// try to add ball here for testing
+    if(['w', 'a', 's', 'd'].includes(e.key)) {
+        ballOne.unsetDirection(e.key)
+    }
+
+
 })
+//// probably need a listener for START , slight delay, ball starts moving. or just after start button is hit, so player is ready.
 
 
 //// Save our game interval to a variable so we can stop it when we want to
 // This interval runs the game loop every 60 ms till we tell it to stop
 const gameInterval = setInterval(gameLoop, 60)
 // Function to stop game loop
-const stopGameLoop = () => { clearInterval(gameInterval)}
+const stopGameLoop = () => {clearInterval(gameInterval)}
 
 
 // Add an event listener, when DOM loads, run the game on an interval
 
 document.addEventListener('DOMContentLoaded', function () {
-    
     // here is our game loop interval
     gameInterval
 })
