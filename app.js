@@ -62,6 +62,37 @@ class Paddle {
             left: false,
             right: false
         }
+        //Movement handler. 
+        // Gives the paddle direction properties. Can probably drop up and down later on. Only need left and right.
+        this.movePlayer = function () {
+            //send guy moving in dirx that is true
+            if (this.direction.up) {
+                this.y -= this.speed
+                // Wall off the sides of the canvas
+                if (this.y <= 0) {
+                    this.y = 0
+                }
+            }
+            if (this.direction.left) {
+                this.x -= this.speed
+                if (this.x <= 0) {
+                    this.x = 0
+                }
+            }
+            //Account for the size of the paddle on left and right side
+            if (this.direction.down) {
+                this.y += this.speed
+                if (this.y + this.height >= game.height) {
+                    this.y = game.height - this.height
+                }
+            }
+            if (this.direction.right) {
+                this.x += this.speed
+                if (this.x + this.width >= game.width) {
+                    this.x = game.width - this.width
+                }
+            }
+        }
         // This puts a player on board to start
         this.render = function () {
             ctx.fillStyle = this.color
@@ -86,6 +117,38 @@ class Ball {
             left: false,
             right: false
         }
+
+        // Movement handler for ball
+        // Will move in all directions
+        this.movePlayer = function () {
+            //Can maybe drop this later. A start button will send the ball moving
+            if (this.direction.up) {
+                this.y -= this.speed
+                // Wall off sides of canvas
+                if (this.y <= 0) {
+                    this.y = 0
+                }
+            }
+            if (this.direction.left) {
+                this.x -= this.speed
+                if (this.x <= 0) {
+                    this.x = 0
+                }
+            }
+            //Size of ball/square should be small but might need to adjust later
+            if (this.direction.down) {
+                this.y += this.speed
+                if (this.y + this.height >= game.height) {
+                    this.y = game.height - this.height
+                }
+            }
+            if (this.direction.right) {
+                this.x += this.speed
+                if (this.x + this.width >= game.width) {
+                    this.x = game.width - this.width
+                }
+            }
+        }
         // This puts a player on board to start
         this.render = function () {
             ctx.fillStyle = this.color
@@ -93,3 +156,6 @@ class Ball {
         }
     }
 }
+
+//  Ball should start at same spot each game. Probably top middle is good. But can be left or right too.
+
