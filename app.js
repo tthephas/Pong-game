@@ -145,6 +145,25 @@ class Ball {
             right: false
         }
 
+// Methods tied to key events
+        // This sets direction for paddle to go that way
+        // All four for now, but up down dropped later
+        this.setDirection = function (key) {
+            console.log('this is the key in setDirection', key)
+            if (key.toLowerCase() == 'w') { this.direction.up = true}
+            if (key.toLowerCase() == 'a') { this.direction.left = true}
+            if (key.toLowerCase() == 's') { this.direction.down = true}
+            if (key.toLowerCase() == 'd') { this.direction.right = true}
+        }
+        //This unsets the direction and stops the paddle from moving that way
+        this.unsetDirection = function (key) {
+            console.log('this is the key in UNsetDirection', key)
+            if (key.toLowerCase() == 'w') { this.direction.up = false}
+            if (key.toLowerCase() == 'a') { this.direction.left = false}
+            if (key.toLowerCase() == 's') { this.direction.down = false}
+            if (key.toLowerCase() == 'd') { this.direction.right = false}
+        }        
+
         // Movement handler for ball
         // Will move in all directions
         this.movePlayer = function () {
@@ -189,11 +208,11 @@ class Ball {
 // Ball should start at same spot each game. Probably top middle is good. But can be left or right too.
 // Paddle should start bottom middle, need to find those pixels 
 
-const player = new Paddle(350, 350, 75, 25, white)
-const ballOne = new Ball(350, 50, 25, 25, white)
+const player = new Paddle(335, 225, 135, 10, 'black')
+const ballOne = new Ball(350, 50, 25, 15, 'black')
 
-// player.render()
-// ballOne.render()
+player.render()
+ballOne.render()
 
 
 /////    COLLISION  DETECTION ///////////
@@ -230,7 +249,7 @@ const detectHit = (thing) => {
 const gameLoop = () => {
     //no console logs here if you can avoid it
     //for testing ok, but not in final
-    console.log('its working')
+    //console.log('its working')
     
     // To resemble real movement, clear board every loop so that it doesnt look like a snake and keep showing previous move. Simulates moving with no tracks
     ctx.clearRect(0, 0, gameBoard.width, gameBoard.height)
@@ -258,6 +277,7 @@ const gameLoop = () => {
     player.render()
     player.movePlayer()
     movement.textContent = `${player.x}, ${player.y}`
+    ballOne.render()
 }
 
 ///////////    EVENT LISTENERS   //////////////
