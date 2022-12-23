@@ -60,12 +60,12 @@ I want to be able to ...
 **Technical Requirements**
 
 - Javascript
--   Canvas tags
+  -   Canvas tags
 - HTML
 - CSS
 
 
-**Approachs taken**
+**Approaches taken**
 - Build out game board with space for the game play, scoreboard, message board (HTML)
 - Build out CSS styling for visual appeal. Make sure ball and paddle are clear for User Experience
 - Use Javascript to control gameplay, scoreboard changes, screen changes for starting and ending screens
