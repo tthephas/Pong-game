@@ -127,7 +127,10 @@ class Ball {
             left: false,
             right: false,
             ///add in a diagonal. down/right to start
-            diagDownRight: false
+            diagDownRight: false,
+            diagUpRight: false,
+            diagDownLeft: false,
+            diagUpLeft: false
         }
 
 // Methods tied to key events
@@ -143,6 +146,9 @@ class Ball {
             if (key.toLowerCase() == 'd') { this.direction.right = true}
             /// give diagonal a key, start with Y (using y, g, j, h for up/dn/lt/rt)
             if (key.toLowerCase() == 'y') { this.direction.diagDownRight = true}
+            if (key.toLowerCase() == 'g') { this.direction.diagUpRight = true}
+            if (key.toLowerCase() == 'h') { this.direction.diagDownLeft = true}
+            if (key.toLowerCase() == 'j') { this.direction.diagUpLeft = true}
         }
         //This unsets the direction and stops the paddle from moving that way
         //Dont think i need an unSEt direction for the ball. constantly moving. 
@@ -154,6 +160,9 @@ class Ball {
             if (key.toLowerCase() == 'd') { this.direction.right = false}
             /// stop diagonal for now if i let go, for testing only
             if (key.toLowerCase() == 'y') { this.direction.diagDownRight = false}
+            if (key.toLowerCase() == 'g') { this.direction.diagUpRight = false}
+            if (key.toLowerCase() == 'h') { this.direction.diagDownLeft = false}
+            if (key.toLowerCase() == 'j') { this.direction.diagUpLeft = false}
         }        
 
         // Movement handler for ball
@@ -198,6 +207,42 @@ class Ball {
                 }
                 if (this.y + this.height >= gameBoard.height) {
                     this.y = gameBoard.height - this.height
+                }
+            }
+            /// going down and left
+            if (this.direction.diagDownLeft) {
+                this.y += this.speed
+                this.x -= this.speed
+                /// this stopped it
+                if (this.x <= 0) {
+                    this.x = 0
+                }
+                if (this.y + this.height >= gameBoard.height) {
+                    this.y = gameBoard.height - this.height
+                }
+            }
+            /// going up and right
+            if (this.direction.diagUpRight) {
+                this.y -= this.speed
+                this.x += this.speed
+                /// this stopped it
+                if (this.x + this.width >= gameBoard.width) {
+                    this.x = gameBoard.width - this.width
+                }
+                if (this.y <= 0) {
+                    this.y = 0
+                }
+            }
+            /// going up and left
+            if (this.direction.diagUpLeft) {
+                this.y -= this.speed
+                this.x -= this.speed
+                /// this stopped it
+                if (this.x <= 0) {
+                    this.x = 0
+                }
+                if (this.y <= 0) {
+                    this.y = 0
                 }
             }
         }
@@ -306,7 +351,7 @@ document.addEventListener('keyup', (e) => {
 
     /// try to add ball here for testing
     /// adding diagonals for now
-    if(['w', 'a', 's', 'd', 'y'].includes(e.key)) {
+    if(['w', 'a', 's', 'd', 'y', 'g', 'j', 'h'].includes(e.key)) {
         ballOne.unsetDirection(e.key)
     }
 
