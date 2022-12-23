@@ -49,6 +49,9 @@ I want to be able to ...
 
 ![Screenshot 2022-12-22 at 4 51 38 PM](https://user-images.githubusercontent.com/47870092/209238689-a37a4993-7f82-44d2-a501-df22251bb54b.png)
 
+### Alternative scoreboard position
+
+<img width="751" alt="Screenshot 2022-12-22 at 7 34 17 PM" src="https://user-images.githubusercontent.com/47870092/209253457-5391721c-c95e-41c2-997a-324ee3bea3c0.png">
 
 ### Ball speed, paddle size, extra ball (bonus feature)
 
