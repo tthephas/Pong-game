@@ -1,0 +1,74 @@
+body {
+    background-color: green;
+    font-family: 'Press Start 2P', cursive;
+}
+h1 {
+    text-align: center;
+    font-size: 128px;
+    
+    margin: 15px 50px;
+}
+#container {
+    width: 1000px;
+    height: 550px;
+    display: grid;
+    grid-template-columns: 200px 900px;
+    margin: 0px 225px;
+    text-align: center;
+    font-size: 48px;
+    border: 1px solid black;
+
+}
+.stats {
+    border: 5px solid rgb(37, 64, 73);
+    padding-top: 15px;
+    font-size: 35px;
+}
+#level {
+    grid-column: 1;
+    grid-row: 1;
+    width: 200px;
+    background-color: lightcoral;
+    
+}
+#levelcount {
+    grid-column: 1;
+    grid-row: 2;
+    width: 200px;
+    background-color: lightgray;
+    
+}
+#score {
+    grid-column: 1;
+    grid-row: 3;
+    width: 200px;
+    background-color: lightcoral;
+}
+#scorecount {
+    grid-column: 1;
+    grid-row: 4;
+    width: 200px;
+    background-color: lightgray;
+    
+}
+#lives {
+    grid-column: 1;
+    grid-row: 5;
+    width: 200px;
+    background-color: lightcoral;
+    
+}
+#livescount {
+    grid-column: 1;
+    grid-row: 6;
+    width: 200px;
+    background-color: lightgray;
+    
+
+}
+main {
+    grid-column: 2;
+    grid-row: 1 / 7;
+    background-color: rgb(101, 84, 84);
+    border: 5px solid black;
+}
