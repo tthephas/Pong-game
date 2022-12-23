@@ -39,7 +39,7 @@ const ctx = gameBoard.getContext('2d')
 gameBoard.setAttribute('width', getComputedStyle(gameBoard)['width'])
 gameBoard.setAttribute('height', getComputedStyle(gameBoard)['height'])
 // not sure what this was for from canvas crawler
-gameBoard.height = 360
+gameBoard.height = 250
 
 
 ///////////    PADDLE AND BALL  //////////////
@@ -62,6 +62,33 @@ class Paddle {
             left: false,
             right: false
         }
+
+        ///////// SETTING DIRECTION HANDLER //////
+
+        // Need this for paddle only i think, due to pressing button
+
+
+        // Methods tied to key events
+        // This sets direction for paddle to go that way
+        // All four for now, but up down dropped later
+        this.setDirection = function (key) {
+            console.log('this is the key in setDirection', key)
+            if (key.toLowerCase() == 'w') { this.direction.up = true}
+            if (key.toLowerCase() == 'a') { this.direction.left = true}
+            if (key.toLowerCase() == 's') { this.direction.down = true}
+            if (key.toLowerCase() == 'd') { this.direction.right = true}
+        }
+        //This unsets the direction and stops the paddle from moving that way
+        this.unsetDirection = function (key) {
+            console.log('this is the key in UNsetDirection', key)
+            if (key.toLowerCase() == 'w') { this.direction.up = false}
+            if (key.toLowerCase() == 'a') { this.direction.left = false}
+            if (key.toLowerCase() == 's') { this.direction.down = false}
+            if (key.toLowerCase() == 'd') { this.direction.right = false}
+        }        
+
+
+
         //Movement handler. 
         // Gives the paddle direction properties. Can probably drop up and down later on. Only need left and right.
         this.movePlayer = function () {
@@ -82,14 +109,14 @@ class Paddle {
             //Account for the size of the paddle on left and right side
             if (this.direction.down) {
                 this.y += this.speed
-                if (this.y + this.height >= game.height) {
-                    this.y = game.height - this.height
+                if (this.y + this.height >= gameBoard.height) {
+                    this.y = gameBoard.height - this.height
                 }
             }
             if (this.direction.right) {
                 this.x += this.speed
-                if (this.x + this.width >= game.width) {
-                    this.x = game.width - this.width
+                if (this.x + this.width >= gameBoard.width) {
+                    this.x = gameBoard.width - this.width
                 }
             }
         }
@@ -138,14 +165,14 @@ class Ball {
             //Size of ball/square should be small but might need to adjust later
             if (this.direction.down) {
                 this.y += this.speed
-                if (this.y + this.height >= game.height) {
-                    this.y = game.height - this.height
+                if (this.y + this.height >= gameBoard.height) {
+                    this.y = gameBoard.height - this.height
                 }
             }
             if (this.direction.right) {
                 this.x += this.speed
-                if (this.x + this.width >= game.width) {
-                    this.x = game.width - this.width
+                if (this.x + this.width >= gameBoard.width) {
+                    this.x = gameBoard.width - this.width
                 }
             }
         }
@@ -165,8 +192,8 @@ class Ball {
 const player = new Paddle(350, 350, 75, 25, white)
 const ballOne = new Ball(350, 50, 25, 25, white)
 
-player.render()
-ballOne.render()
+// player.render()
+// ballOne.render()
 
 
 /////    COLLISION  DETECTION ///////////
@@ -213,22 +240,58 @@ const gameLoop = () => {
     
     // Will need a hit detector later only for bottom of screen. When ball passes paddle, player loses. When ball hits paddle, it bounces off it.
 
-    // Hit detector at top so it takes precedence
-    if (ogre.alive) {
-        ogre.render()
-        detectHit(ogre)
-    } else if (ogre2.alive) {
-        message.textContent = "Now kill shrek 2"
-        ogre2.render()
-        detectHit(ogre2)
-    } else { 
-        message.textContent = "you win!"
-        stopGameLoop
-    }
+    // mess with thsi later. not sure i need ///////
+    // // Hit detector at top so it takes precedence
+    // if (ogre.alive) {
+    //     ogre.render()
+    //     detectHit(ogre)
+    // } else if (ogre2.alive) {
+    //     message.textContent = "Now kill shrek 2"
+    //     ogre2.render()
+    //     detectHit(ogre2)
+    // } else { 
+    //     message.textContent = "you win!"
+    //     stopGameLoop
+    // }
 
 
     player.render()
     player.movePlayer()
     movement.textContent = `${player.x}, ${player.y}`
 }
+
+///////////    EVENT LISTENERS   //////////////
+
+/// One event for key DOWN. For paddle only
+// Key DOWN will set the paddle direction
+document.addEventListener('keydown', (e) => {
+    // when a key is pressed, set the direction
+    player.setDirection(e.key)
+})
+
+/// One key vent for a key UP
+// This will stop the paddle from moving
+document.addEventListener('keyup', (e) => {
+    // when a key is pressed, unset the direction
+    /// handled slightly different
+    if(['w', 'a', 's', 'd'].includes(e.key)) {
+        player.unsetDirection(e.key)
+    }
+})
+
+
+//// Save our game interval to a variable so we can stop it when we want to
+// This interval runs the game loop every 60 ms till we tell it to stop
+const gameInterval = setInterval(gameLoop, 60)
+// Function to stop game loop
+const stopGameLoop = () => { clearInterval(gameInterval)}
+
+
+// Add an event listener, when DOM loads, run the game on an interval
+
+document.addEventListener('DOMContentLoaded', function () {
+    
+    // here is our game loop interval
+    gameInterval
+})
 

@@ -8,6 +8,12 @@ h1 {
     
     margin: 15px 50px;
 }
+canvas {
+    background-color: lightgray;
+    width: 100%;
+    height: 100;
+    
+}
 #container {
     width: 1000px;
     height: 550px;
@@ -17,6 +23,7 @@ h1 {
     text-align: center;
     font-size: 48px;
     border: 1px solid black;
+    
 
 }
 .stats {
@@ -67,6 +74,7 @@ h1 {
 
 }
 main {
+    grid-area: gameBoard;
     grid-column: 2;
     grid-row: 1 / 7;
     background-color: rgb(101, 84, 84);
