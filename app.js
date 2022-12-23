@@ -38,8 +38,8 @@ const ctx = gameBoard.getContext('2d')
 
 gameBoard.setAttribute('width', getComputedStyle(gameBoard)['width'])
 gameBoard.setAttribute('height', getComputedStyle(gameBoard)['height'])
-// not sure what this was for from canvas crawler
-gameBoard.height = 250
+// Sizes the board somehow
+gameBoard.height = 360
 
 
 ///////////    PADDLE AND BALL  //////////////
@@ -53,8 +53,9 @@ class Paddle {
         this.width = width
         this.height = height
         this.color = color
-        // Property to help with moving
-        this.speed = 15
+        // Property to help with moving. Changing this will make faster, moving more pixels per move. Make variable later to make difficulty higher.
+        // 15 too slow. 35 is good for now.
+        this.speed = 35
         // Add directions. The paddle can only move left and right. Leaving all four for now
         this.direction = {
             up: false,
@@ -73,18 +74,14 @@ class Paddle {
         // All four for now, but up down dropped later
         this.setDirection = function (key) {
             console.log('this is the key in setDirection', key)
-            if (key.toLowerCase() == 'w') { this.direction.up = true}
-            if (key.toLowerCase() == 'a') { this.direction.left = true}
-            if (key.toLowerCase() == 's') { this.direction.down = true}
-            if (key.toLowerCase() == 'd') { this.direction.right = true}
+            if (key == 'ArrowLeft') { this.direction.left = true}
+            if (key == 'ArrowRight') { this.direction.right = true}
         }
         //This unsets the direction and stops the paddle from moving that way
         this.unsetDirection = function (key) {
             console.log('this is the key in UNsetDirection', key)
-            if (key.toLowerCase() == 'w') { this.direction.up = false}
-            if (key.toLowerCase() == 'a') { this.direction.left = false}
-            if (key.toLowerCase() == 's') { this.direction.down = false}
-            if (key.toLowerCase() == 'd') { this.direction.right = false}
+            if (key == 'ArrowLeft') { this.direction.left = false}
+            if (key == 'ArrowRight') { this.direction.right = false}
         }        
 
 
@@ -208,11 +205,13 @@ class Ball {
 // Ball should start at same spot each game. Probably top middle is good. But can be left or right too.
 // Paddle should start bottom middle, need to find those pixels 
 
-const player = new Paddle(335, 225, 135, 10, 'black')
-const ballOne = new Ball(350, 50, 25, 15, 'black')
+/// Player and ball are good size now. Will need to give player size a variable for later, to make the paddle shorter or longer based on level.
+// Paddle at 360x is about middle. Y 335 is just barely off bottom so that ball can visually pass the paddle if it gets by.
+const player = new Paddle(360, 335, 165, 8, 'black')
+const ballOne = new Ball(400, 50, 25, 15, 'black')
 
-player.render()
-ballOne.render()
+// player.render()
+// ballOne.render()
 
 
 /////    COLLISION  DETECTION ///////////
@@ -294,7 +293,7 @@ document.addEventListener('keydown', (e) => {
 document.addEventListener('keyup', (e) => {
     // when a key is pressed, unset the direction
     /// handled slightly different
-    if(['w', 'a', 's', 'd'].includes(e.key)) {
+    if(['ArrowLeft', 'ArrowRight'].includes(e.key)) {
         player.unsetDirection(e.key)
     }
 })
