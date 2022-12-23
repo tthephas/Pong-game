@@ -42,4 +42,54 @@ gameBoard.setAttribute('height', getComputedStyle(gameBoard)['height'])
 gameBoard.height = 360
 
 
+///////////    PADDLE AND BALL  //////////////
 
+// These are slightly the same type objects so i'm going to use a class. The ball is square (circle later) and the paddle is rectangle. But both have movement needed, height , width, color , and coordinates.
+
+class Paddle {
+    constructor(x, y, width, height, color) {
+        this.x = x
+        this.y = y
+        this.width = width
+        this.height = height
+        this.color = color
+        // Property to help with moving
+        this.speed = 15
+        // Add directions. The paddle can only move left and right. Leaving all four for now
+        this.direction = {
+            up: false,
+            down: false,
+            left: false,
+            right: false
+        }
+        // This puts a player on board to start
+        this.render = function () {
+            ctx.fillStyle = this.color
+            ctx.fillRect(this.x, this.y, this.width, this.height)
+        }
+    }
+}
+
+class Ball {
+    constructor(x, y, width, height, color) {
+        this.x = x
+        this.y = y
+        this.width = width
+        this.height = height
+        this.color = color
+        // Property to help with moving
+        this.speed = 15
+        // Add directions. The ball can move all directions.
+        this.direction = {
+            up: false,
+            down: false,
+            left: false,
+            right: false
+        }
+        // This puts a player on board to start
+        this.render = function () {
+            ctx.fillStyle = this.color
+            ctx.fillRect(this.x, this.y, this.width, this.height)
+        }
+    }
+}
