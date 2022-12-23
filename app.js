@@ -19,3 +19,27 @@ const gameBoard = document.getElementById('canvas')
 const movement = document.getElementById('movement')
 // Create a status box. This will be a box to show messages. Example, you win, you lose, good luck. 
 const message = document.getElementById('message')
+
+//Testing a message in message box works. Can use innerText
+//message.innerText ="hi is this working"
+
+// Set the game context to 2D
+// Save it to a variable to reference later. Using CTX
+// Tells code to work within the context of the canvas
+const ctx = gameBoard.getContext('2d')
+
+
+// Reminders about coordinates. Top left x,y coordinates, are 0,0. Bottom right will flex with the window, but are found thru ctx.w for width and ctx.h for height.
+// Will need the computed size of the canvas. Will refer to that later.
+// Once we get size of canvas, we can use those to simulate moves differently
+
+
+////////////    SETUP  ////////////////
+
+gameBoard.setAttribute('width', getComputedStyle(gameBoard)['width'])
+gameBoard.setAttribute('height', getComputedStyle(gameBoard)['height'])
+// not sure what this was for from canvas crawler
+gameBoard.height = 360
+
+
+
