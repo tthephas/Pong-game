@@ -119,14 +119,11 @@ class Ball {
         this.height = height
         this.color = color
         // Property to help with moving. Reminder that paddle is 35 now. Trying 5 for testing to see ball moving easier. 
-        this.speed = 5
+        this.speed = 10
         // Add directions. The ball can move all directions. 
         // Update. The ball can only move in some diagonal motion. Not straight up , down, left or right. taking out those elements.
         this.direction = {
-            // up: false,
-            // down: false,
-            // left: false,
-            // right: false,
+
             ///add in a diagonal. down/right to start
             diagDownRight: false,
             diagUpRight: false,
@@ -190,34 +187,6 @@ class Ball {
             this.direction.diagUpRight = true         
         }
 
-
-        this.setDirection = function (key) {
-            console.log('this is the key in setDirection', key)
-            // if (key.toLowerCase() == 'w') { this.direction.up = true}
-            // if (key.toLowerCase() == 'a') { this.direction.left = true}
-            // if (key.toLowerCase() == 's') { this.direction.down = true}
-            // if (key.toLowerCase() == 'd') { this.direction.right = true}
-            /// give diagonal a key, start with Y (using y, g, j, h for up/dn/lt/rt)
-            if (key.toLowerCase() == 'y') { this.direction.diagDownRight = true}
-            if (key.toLowerCase() == 'g') { this.direction.diagUpRight = true}
-            if (key.toLowerCase() == 'h') { this.direction.diagDownLeft = true}
-            if (key.toLowerCase() == 'j') { this.direction.diagUpLeft = true}
-        }
-        //This unsets the direction and stops the paddle from moving that way
-        //Dont think i need an unSEt direction for the ball. constantly moving. 
-        this.unsetDirection = function (key) {
-            console.log('this is the key in UNsetDirection', key)
-            // if (key.toLowerCase() == 'w') { this.direction.up = false}
-            // if (key.toLowerCase() == 'a') { this.direction.left = false}
-            // if (key.toLowerCase() == 's') { this.direction.down = false}
-            // if (key.toLowerCase() == 'd') { this.direction.right = false}
-            /// stop diagonal for now if i let go, for testing only
-            if (key.toLowerCase() == 'y') { this.direction.diagDownRight = false}
-            if (key.toLowerCase() == 'g') { this.direction.diagUpRight = false}
-            if (key.toLowerCase() == 'h') { this.direction.diagDownLeft = false}
-            if (key.toLowerCase() == 'j') { this.direction.diagUpLeft = false}
-        }        
-
         // Movement handler for ball
         // Will move in all directions.
         this.movePlayer = function () {
@@ -234,8 +203,13 @@ class Ball {
                     ballOne.bounceDirectionDownLeftFromRightWall()
                 }
                 //// no bounce, this means got past player. end game or lose life later
+                /// Game over message works
+                //// need to stop the ball right when bottom is hit, for visual reality look
                 if (this.y + this.height >= gameBoard.height) {
                     this.y = gameBoard.height - this.height
+                    message.textContent = 'Ball hit BOTTOM, GAME OVER'
+                    //try giving x a zero immediately. zero lets it show bottom right. negative 50 makes it disappear
+                    this.x = -50
                 }
             }
             /// going down and left
@@ -248,8 +222,13 @@ class Ball {
                     ballOne.bounceDirectionDownRightFromLeftWall()
                 }
                 /// dont bounce from the bottom here!!! figure this out later. means game over or player loses life
+                /// Game over message works
+                //// need to stop the ball right when bottom is hit, for visual reality look
                 if (this.y + this.height >= gameBoard.height) {
                     this.y = gameBoard.height - this.height
+                    message.textContent = 'Ball hit BOTTOM, GAME OVER'
+                    //try giving x a zero immediately. zero lets it show bottom right. negative 50 makes it disappear
+                    this.x = -50
                 }
             }
             /// going up and right
@@ -392,8 +371,6 @@ document.addEventListener('keydown', (e) => {
     // when a key is pressed, set the direction
     player.setDirection(e.key)
 
-    /// try to add ball here for testing
-    ballOne.setDirection(e.key)
     // get the ball started , no keyup function b/c it jsut goes
     ballOne.startDirection(e.key)
 })
