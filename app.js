@@ -143,11 +143,53 @@ class Ball {
         }
 
         // Build a new function called bounce with the reverse directions that can happen. start with going up left and bouncing from there. 
+        /// these are bounces from the walls only. not the direct hit. so those might be different and built different. 
+        // these will only go in the part where the balls hit the walls
+        // i will skip the one where it hits the bottom b/c the ball doesnt bounce from the bottom
         this.bounceDirectionDownLeft = function () {
             console.log('i am bouncing down left')
             this.direction.diagUpLeft = false
             this.direction.diagDownLeft = true         
         }
+        this.bounceDirectionDownRight = function () {
+            console.log('i am bouncing down Right')
+            this.direction.diagUpRight = false
+            this.direction.diagDownRight = true         
+        }
+        /// had to account for bouncing from down left from left wall and not just from ceiling
+        this.bounceDirectionDownRightFromLeftWall = function () {
+            console.log('i am bouncing down Right')
+            this.direction.diagDownLeft = false
+            this.direction.diagDownRight = true         
+        }
+        /// SAME FOR RIGHT WALL had to account for bouncing from down right from right wall and not just from ceiling
+        this.bounceDirectionDownLeftFromRightWall = function () {
+            console.log('i am bouncing down Right')
+            this.direction.diagDownRight = false
+            this.direction.diagDownLeft = true         
+        }        
+        this.bounceDirectionUpLeft = function () {
+            console.log('i am bouncing up left')
+            this.direction.diagUpRight = false
+            this.direction.diagUpLeft = true         
+        }
+        this.bounceDirectionUpRight = function () {
+            console.log('i am bouncing up right')
+            this.direction.diagUpLeft = false
+            this.direction.diagUpRight = true         
+        }
+        /// need to rebuild the up right and  up left ones for IF  they come off the paddle and not the wall
+        this.bounceDirectionUpLeftFromPaddle = function () {
+            console.log('i am bouncing up left')
+            this.direction.diagDownLeft = false
+            this.direction.diagUpLeft = true         
+        }
+        this.bounceDirectionUpRightFromPaddle = function () {
+            console.log('i am bouncing up right')
+            this.direction.diagDownRight = false
+            this.direction.diagUpRight = true         
+        }
+
 
         this.setDirection = function (key) {
             console.log('this is the key in setDirection', key)
@@ -189,7 +231,9 @@ class Ball {
                 /// instead of stopping it. lets bounce it back. 
                 if (this.x + this.width >= gameBoard.width) {
                     this.x = gameBoard.width - this.width
+                    ballOne.bounceDirectionDownLeftFromRightWall()
                 }
+                //// no bounce, this means got past player. end game or lose life later
                 if (this.y + this.height >= gameBoard.height) {
                     this.y = gameBoard.height - this.height
                 }
@@ -201,7 +245,9 @@ class Ball {
                 /// this stopped it
                 if (this.x <= 0) {
                     this.x = 0
+                    ballOne.bounceDirectionDownRightFromLeftWall()
                 }
+                /// dont bounce from the bottom here!!! figure this out later. means game over or player loses life
                 if (this.y + this.height >= gameBoard.height) {
                     this.y = gameBoard.height - this.height
                 }
@@ -213,9 +259,11 @@ class Ball {
                 /// this stopped it
                 if (this.x + this.width >= gameBoard.width) {
                     this.x = gameBoard.width - this.width
+                    ballOne.bounceDirectionUpLeft()
                 }
                 if (this.y <= 0) {
                     this.y = 0
+                    ballOne.bounceDirectionDownRight()
                 }
             }
             /// going up and left
@@ -228,6 +276,7 @@ class Ball {
                     this.x = 0
                     // this didnt work. tyring a bounce insteaed
                     //this.direction.diagUpRight
+                    ballOne.bounceDirectionUpRight()
                 }
                 if (this.y <= 0) {
                     // try to bounce instead
@@ -246,10 +295,12 @@ class Ball {
         }
         /// this worked! but it just bounced once. i cannot right for every scenario. now need something to figure out how to flip the direction, no matter what it is.
         this.reverseDirection = function () {
-            console.log('should be going up left now')
-            this.direction.diagDownRight = false
-            this.direction.diagUpLeft = true
-            
+            console.log('should bounce either way')
+            if (this.direction.diagDownRight) {
+                ballOne.bounceDirectionUpRightFromPaddle()
+            } else {
+                ballOne.bounceDirectionUpLeftFromPaddle()
+            }
         }
     }
 }
