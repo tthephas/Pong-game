@@ -1,4 +1,4 @@
-// Start of PONG game. First version. test add
+// Start of PONG game. First version. 
 
 //////////   RULES FOR THE GAME /////////
 
@@ -118,14 +118,15 @@ class Ball {
         this.width = width
         this.height = height
         this.color = color
-        // Property to help with moving. Reminder that paddle is 35 now.
-        this.speed = 15
-        // Add directions. The ball can move all directions.
+        // Property to help with moving. Reminder that paddle is 35 now. Trying 5 for testing to see ball moving easier. 
+        this.speed = 5
+        // Add directions. The ball can move all directions. 
+        // Update. The ball can only move in some diagonal motion. Not straight up , down, left or right. taking out those elements.
         this.direction = {
-            up: false,
-            down: false,
-            left: false,
-            right: false,
+            // up: false,
+            // down: false,
+            // left: false,
+            // right: false,
             ///add in a diagonal. down/right to start
             diagDownRight: false,
             diagUpRight: false,
@@ -140,10 +141,10 @@ class Ball {
 
         this.setDirection = function (key) {
             console.log('this is the key in setDirection', key)
-            if (key.toLowerCase() == 'w') { this.direction.up = true}
-            if (key.toLowerCase() == 'a') { this.direction.left = true}
-            if (key.toLowerCase() == 's') { this.direction.down = true}
-            if (key.toLowerCase() == 'd') { this.direction.right = true}
+            // if (key.toLowerCase() == 'w') { this.direction.up = true}
+            // if (key.toLowerCase() == 'a') { this.direction.left = true}
+            // if (key.toLowerCase() == 's') { this.direction.down = true}
+            // if (key.toLowerCase() == 'd') { this.direction.right = true}
             /// give diagonal a key, start with Y (using y, g, j, h for up/dn/lt/rt)
             if (key.toLowerCase() == 'y') { this.direction.diagDownRight = true}
             if (key.toLowerCase() == 'g') { this.direction.diagUpRight = true}
@@ -154,10 +155,10 @@ class Ball {
         //Dont think i need an unSEt direction for the ball. constantly moving. 
         this.unsetDirection = function (key) {
             console.log('this is the key in UNsetDirection', key)
-            if (key.toLowerCase() == 'w') { this.direction.up = false}
-            if (key.toLowerCase() == 'a') { this.direction.left = false}
-            if (key.toLowerCase() == 's') { this.direction.down = false}
-            if (key.toLowerCase() == 'd') { this.direction.right = false}
+            // if (key.toLowerCase() == 'w') { this.direction.up = false}
+            // if (key.toLowerCase() == 'a') { this.direction.left = false}
+            // if (key.toLowerCase() == 's') { this.direction.down = false}
+            // if (key.toLowerCase() == 'd') { this.direction.right = false}
             /// stop diagonal for now if i let go, for testing only
             if (key.toLowerCase() == 'y') { this.direction.diagDownRight = false}
             if (key.toLowerCase() == 'g') { this.direction.diagUpRight = false}
@@ -166,36 +167,36 @@ class Ball {
         }        
 
         // Movement handler for ball
-        // Will move in all directions
+        // Will move in all directions.
         this.movePlayer = function () {
-            //Can maybe drop this later. A start button will send the ball moving
-            if (this.direction.up) {
-                this.y -= this.speed
-                // Wall off sides of canvas
-                // can add the bouncing here. reverses the y or x .
-                if (this.y <= 0) {
-                    this.y = 0
-                }
-            }
-            if (this.direction.left) {
-                this.x -= this.speed
-                if (this.x <= 0) {
-                    this.x = 0
-                }
-            }
-            //Size of ball/square should be small but might need to adjust later
-            if (this.direction.down) {
-                this.y += this.speed
-                if (this.y + this.height >= gameBoard.height) {
-                    this.y = gameBoard.height - this.height
-                }
-            }
-            if (this.direction.right) {
-                this.x += this.speed
-                if (this.x + this.width >= gameBoard.width) {
-                    this.x = gameBoard.width - this.width
-                }
-            }
+            // //Can maybe drop this later. A start button will send the ball moving
+            // if (this.direction.up) {
+            //     this.y -= this.speed
+            //     // Wall off sides of canvas
+            //     // can add the bouncing here. reverses the y or x .
+            //     if (this.y <= 0) {
+            //         this.y = 0
+            //     }
+            // }
+            // if (this.direction.left) {
+            //     this.x -= this.speed
+            //     if (this.x <= 0) {
+            //         this.x = 0
+            //     }
+            // }
+            // //Size of ball/square should be small but might need to adjust later
+            // if (this.direction.down) {
+            //     this.y += this.speed
+            //     if (this.y + this.height >= gameBoard.height) {
+            //         this.y = gameBoard.height - this.height
+            //     }
+            // }
+            // if (this.direction.right) {
+            //     this.x += this.speed
+            //     if (this.x + this.width >= gameBoard.width) {
+            //         this.x = gameBoard.width - this.width
+            //     }
+            // }
             /// build a diagonal. to start, go down right. both are positive x,y
             if (this.direction.diagDownRight) {
                 // got one ball to move diagonal!!! later can mess with more x or y to make not diagonal. can mess with the speed variable
