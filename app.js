@@ -139,6 +139,22 @@ class Ball {
         // All four for now, but up down dropped later
         /// could make this ANY key for now. "hit any key to start". then any key down, send the ball flying
 
+
+        /// Lets give the ball a new function. This will listen for the space bar (a good one for a start button) and just send the ball going down and to the right. 
+        //// Spacebar not working. trying arrow up since not in use
+
+        this.startDirection = function (key) {
+            console.log('BALL IS MOVING BABY!!', key)
+            if (key == "ArrowUp") { this.direction.diagDownRight = true}
+        }
+        this.reverseDirection = function () {
+            console.log('should be going up left now')
+            this.direction.diagUpLeft = true
+            this.movePlayer()
+        }
+
+
+
         this.setDirection = function (key) {
             console.log('this is the key in setDirection', key)
             // if (key.toLowerCase() == 'w') { this.direction.up = true}
@@ -252,6 +268,13 @@ class Ball {
             ctx.fillStyle = this.color
             ctx.fillRect(this.x, this.y, this.width, this.height)
         }
+        /// this worked! but it just bounced once. i cannot right for every scenario. now need something to figure out how to flip the direction, no matter what it is.
+        this.reverseDirection = function () {
+            console.log('should be going up left now')
+            this.direction.diagDownRight = false
+            this.direction.diagUpLeft = true
+            //this.movePlayer()
+        }
     }
 }
 
@@ -291,6 +314,11 @@ const detectHit = (thing) => {
         //thing.alive = false
         //change the status box
         message.textContent = 'Ball hit paddle/wall'
+        // has a new direction on a hit
+        // this worked. need to reverse for any direction
+        ballOne.reverseDirection()
+        // should move the player now
+        //ballOne.movePlayer()
     } 
 }
 
@@ -339,6 +367,8 @@ document.addEventListener('keydown', (e) => {
 
     /// try to add ball here for testing
     ballOne.setDirection(e.key)
+    // get the ball started , no keyup function b/c it jsut goes
+    ballOne.startDirection(e.key)
 })
 
 /// One key event for a key UP. For paddle only
@@ -352,6 +382,8 @@ document.addEventListener('keyup', (e) => {
 
     /// try to add ball here for testing
     /// adding diagonals for now
+    /// can take out w,a,s,d anytime now
+    /// add spacebar key
     if(['w', 'a', 's', 'd', 'y', 'g', 'j', 'h'].includes(e.key)) {
         ballOne.unsetDirection(e.key)
     }
@@ -362,7 +394,7 @@ document.addEventListener('keyup', (e) => {
 
 
 //// Save our game interval to a variable so we can stop it when we want to
-// This interval runs the game loop every 60 ms till we tell it to stop
+// This interval runs the game loop every 60 ms till we tell it to stop. Going to 30 seems faster visually.
 const gameInterval = setInterval(gameLoop, 60)
 // Function to stop game loop
 const stopGameLoop = () => {clearInterval(gameInterval)}
