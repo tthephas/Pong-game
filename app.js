@@ -24,6 +24,16 @@ const message = document.getElementById('message')
 //message.innerText ="hi is this working"
 //// TEST ONLY ////
 
+////////////////////    BUILD OUT SCOREBOARD (BONUS, LEVELS AND LIVES) ///////////////////
+
+///  Setup variables for Score. Start at zero. Goes up one with each hit to the paddle, not hit to walls. Big difference. Will start a counter and see if i can insert that counter into the text for the scoreboard. ID is "scorecount".
+
+// Now shows zero and is a number. Going to add to it thru the hit detector on the paddle.
+// Added a counter near the hit detector. Goes up 1 by 1 when hit paddle. Shows in scoreboard and message board when game ends.
+const scoreCount = document.getElementById('scorecount')
+scoreCount.innerHTML = 0
+
+
 
 // Set the game context to 2D
 // Save it to a variable to reference later. Using CTX
@@ -207,7 +217,7 @@ class Ball {
                 //// need to stop the ball right when bottom is hit, for visual reality look
                 if (this.y + this.height >= gameBoard.height) {
                     this.y = gameBoard.height - this.height
-                    message.textContent = 'Ball hit BOTTOM, GAME OVER'
+                    message.textContent = 'GAME OVER. You scored ' + counterForScore
                     //try giving x a zero immediately. zero lets it show bottom right. negative 50 makes it disappear
                     this.x = -50
                 }
@@ -226,7 +236,7 @@ class Ball {
                 //// need to stop the ball right when bottom is hit, for visual reality look
                 if (this.y + this.height >= gameBoard.height) {
                     this.y = gameBoard.height - this.height
-                    message.textContent = 'Ball hit BOTTOM, GAME OVER'
+                    message.textContent = 'GAME OVER. You scored ' + counterForScore
                     //try giving x a zero immediately. zero lets it show bottom right. negative 50 makes it disappear
                     this.x = -50
                 }
@@ -306,7 +316,8 @@ const ballOne = new Ball(400, 50, 15, 12, 'black')
 // To do this we need to account for the entire space that the ball takes up AND the paddle takes up. The sides should be similar but easier its its not a moving object
 // Use the ball AND paddle x, y, width, height
 // Ball seems to go thru paddle by a pixel, can account for this later
-
+// Counter to keep track of score
+counterForScore = 0
 const detectHit = (thing) => {
     //Use a big if statement to see if any side of the ball hits any side of the paddle or walls.
     if (ballOne.x < thing.x + thing.width
@@ -316,6 +327,11 @@ const detectHit = (thing) => {
 
         //change the status box
         message.textContent = 'Ball hit paddle/wall'
+
+        // Add to score counter
+        // Counter starts at zero. Adds 1 here each time hits paddle. Only Goes up locally. Start at zero when reset/save. Posts in the inner HTML of that box. And also posts in message board when game ends. 
+        scoreCount.innerHTML = counterForScore + 1
+        counterForScore = counterForScore + 1
         // has a new direction on a hit
         // this worked. need to reverse for any direction
         ballOne.reverseDirection()
