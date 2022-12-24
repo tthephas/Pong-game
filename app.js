@@ -119,7 +119,7 @@ class Ball {
         this.height = height
         this.color = color
         // Property to help with moving. Reminder that paddle is 35 now. Trying 5 for testing to see ball moving easier. 
-        this.speed = 10
+        this.speed = 15
         // Add directions. The ball can move all directions. 
         // Update. The ball can only move in some diagonal motion. Not straight up , down, left or right. taking out those elements.
         this.direction = {
@@ -291,8 +291,8 @@ class Ball {
 
 /// Player and ball are good size now. Will need to give player size a variable for later, to make the paddle shorter or longer based on level.
 // Paddle at 360x is about middle. Y 335 is just barely off bottom so that ball can visually pass the paddle if it gets by.
-const player = new Paddle(360, 335, 165, 8, 'black')
-const ballOne = new Ball(400, 50, 25, 15, 'black')
+const player = new Paddle(360, 335, 145, 8, 'black')
+const ballOne = new Ball(400, 50, 15, 12, 'black')
 
 // this was for testing only
 // player.render()
@@ -305,6 +305,7 @@ const ballOne = new Ball(400, 50, 25, 15, 'black')
 // Detect a hit. In pong, the ball can hit any side. if it hits the bottom, the player loses. if it hits the paddle or any other side, the ball bounces
 // To do this we need to account for the entire space that the ball takes up AND the paddle takes up. The sides should be similar but easier its its not a moving object
 // Use the ball AND paddle x, y, width, height
+// Ball seems to go thru paddle by a pixel, can account for this later
 
 const detectHit = (thing) => {
     //Use a big if statement to see if any side of the ball hits any side of the paddle or walls.
@@ -312,19 +313,12 @@ const detectHit = (thing) => {
         && ballOne.x + ballOne.width > thing.x
         && ballOne.y < thing.y + thing.height
         && ballOne.y + ballOne.height > thing.y) {
-        //use for testing only
-        // console.log('hit!')
 
-        //////// dont need this for now. no one is dying. but will need something later if ball hits bottom of screen to trigger game end
-        //ogre disappears b/c of the render function in game loop
-        //thing.alive = false
         //change the status box
         message.textContent = 'Ball hit paddle/wall'
         // has a new direction on a hit
         // this worked. need to reverse for any direction
         ballOne.reverseDirection()
-        // should move the player now
-        //ballOne.movePlayer()
     } 
 }
 
@@ -346,10 +340,9 @@ const gameLoop = () => {
 
 
     ////  LEAVE FOR NOW FOR TESTING PURPOSES ////
-    
-    // Will need a hit detector later only for bottom of screen. When ball passes paddle, player loses. When ball hits paddle, it bounces off it.    
+        
     // Hit detector at top so it takes precedence
-    // This works at least now for messaging. need to stop it at paddle. message if hit bottom. more things if hit bottom. also bounce it. 
+    // This is working. Bouncing off walls and paddle. Message if hit paddle or bottom.
     detectHit(player)
 
     ////////   ALOT MORE TO DO HERE  ////////
@@ -383,19 +376,7 @@ document.addEventListener('keyup', (e) => {
     if(['ArrowLeft', 'ArrowRight'].includes(e.key)) {
         player.unsetDirection(e.key)
     }
-
-    /// try to add ball here for testing
-    /// adding diagonals for now
-    /// can take out w,a,s,d anytime now
-    /// add spacebar key
-    if(['w', 'a', 's', 'd', 'y', 'g', 'j', 'h'].includes(e.key)) {
-        ballOne.unsetDirection(e.key)
-    }
-
-
 })
-//// probably need a listener for START , slight delay, ball starts moving. or just after start button is hit, so player is ready.
-
 
 //// Save our game interval to a variable so we can stop it when we want to
 // This interval runs the game loop every 60 ms till we tell it to stop. Going to 30 seems faster visually.
@@ -409,5 +390,6 @@ const stopGameLoop = () => {clearInterval(gameInterval)}
 document.addEventListener('DOMContentLoaded', function () {
     // here is our game loop interval
     gameInterval
+    message.textContent = 'PRESS UP ARROW TO START'
 })
 
