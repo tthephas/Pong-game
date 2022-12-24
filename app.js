@@ -135,25 +135,19 @@ class Ball {
         }
 
 // Methods tied to key events
-        // This sets direction for paddle to go that way
-        // All four for now, but up down dropped later
-        /// could make this ANY key for now. "hit any key to start". then any key down, send the ball flying
-
-
-        /// Lets give the ball a new function. This will listen for the space bar (a good one for a start button) and just send the ball going down and to the right. 
-        //// Spacebar not working. trying arrow up since not in use
-
+ 
+        /// Lets give the ball a new function. This will listen for the arrow up (try to change later to space bar or any key) and just send the ball going down and to the right. 
         this.startDirection = function (key) {
             console.log('BALL IS MOVING BABY!!', key)
             if (key == "ArrowUp") { this.direction.diagDownRight = true}
         }
-        this.reverseDirection = function () {
-            console.log('should be going up left now')
-            this.direction.diagUpLeft = true
-            this.movePlayer()
+
+        // Build a new function called bounce with the reverse directions that can happen. start with going up left and bouncing from there. 
+        this.bounceDirectionDownLeft = function () {
+            console.log('i am bouncing down left')
+            this.direction.diagUpLeft = false
+            this.direction.diagDownLeft = true         
         }
-
-
 
         this.setDirection = function (key) {
             console.log('this is the key in setDirection', key)
@@ -185,40 +179,14 @@ class Ball {
         // Movement handler for ball
         // Will move in all directions.
         this.movePlayer = function () {
-            // //Can maybe drop this later. A start button will send the ball moving
-            // if (this.direction.up) {
-            //     this.y -= this.speed
-            //     // Wall off sides of canvas
-            //     // can add the bouncing here. reverses the y or x .
-            //     if (this.y <= 0) {
-            //         this.y = 0
-            //     }
-            // }
-            // if (this.direction.left) {
-            //     this.x -= this.speed
-            //     if (this.x <= 0) {
-            //         this.x = 0
-            //     }
-            // }
-            // //Size of ball/square should be small but might need to adjust later
-            // if (this.direction.down) {
-            //     this.y += this.speed
-            //     if (this.y + this.height >= gameBoard.height) {
-            //         this.y = gameBoard.height - this.height
-            //     }
-            // }
-            // if (this.direction.right) {
-            //     this.x += this.speed
-            //     if (this.x + this.width >= gameBoard.width) {
-            //         this.x = gameBoard.width - this.width
-            //     }
-            // }
+
             /// build a diagonal. to start, go down right. both are positive x,y
             if (this.direction.diagDownRight) {
                 // got one ball to move diagonal!!! later can mess with more x or y to make not diagonal. can mess with the speed variable
                 this.y += this.speed
                 this.x += this.speed
                 /// this stopped it
+                /// instead of stopping it. lets bounce it back. 
                 if (this.x + this.width >= gameBoard.width) {
                     this.x = gameBoard.width - this.width
                 }
@@ -256,10 +224,18 @@ class Ball {
                 this.x -= this.speed
                 /// this stopped it
                 if (this.x <= 0) {
+                    /// try to bounce it back instead of stop
                     this.x = 0
+                    // this didnt work. tyring a bounce insteaed
+                    //this.direction.diagUpRight
                 }
                 if (this.y <= 0) {
+                    // try to bounce instead
                     this.y = 0
+                    // didnt work, trying a bounce func instead
+                    //this.direction.diagDownLeft
+                    // THIS WORKED!!!! 
+                    ballOne.bounceDirectionDownLeft()
                 }
             }
         }
@@ -273,7 +249,7 @@ class Ball {
             console.log('should be going up left now')
             this.direction.diagDownRight = false
             this.direction.diagUpLeft = true
-            //this.movePlayer()
+            
         }
     }
 }
