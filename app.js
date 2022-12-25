@@ -217,7 +217,7 @@ class Ball {
                 //// need to stop the ball right when bottom is hit, for visual reality look
                 if (this.y + this.height >= gameBoard.height) {
                     this.y = gameBoard.height - this.height
-                    message.textContent = 'GAME OVER. You scored ' + counterForScore
+                    message.textContent = 'GAME OVER. You scored ' + counterForScore + ' points'
                     //try giving x a zero immediately. zero lets it show bottom right. negative 50 makes it disappear
                     this.x = -50
                 }
@@ -236,7 +236,7 @@ class Ball {
                 //// need to stop the ball right when bottom is hit, for visual reality look
                 if (this.y + this.height >= gameBoard.height) {
                     this.y = gameBoard.height - this.height
-                    message.textContent = 'GAME OVER. You scored ' + counterForScore
+                    message.textContent = 'GAME OVER. You scored ' + counterForScore + ' points'
                     //try giving x a zero immediately. zero lets it show bottom right. negative 50 makes it disappear
                     this.x = -50
                 }

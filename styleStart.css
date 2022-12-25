@@ -51,11 +51,13 @@ button:hover {background-color: rgb(120, 118, 118)}
 
 /* Add styles to the form container */
 .instructions-container {
-  max-width: 600px;
-  padding: 5px;
+  max-width: 500px;
+  padding: 15px;
   background-color: lightgray;
   color: black;
-  font-size: 18px;
+  font-size: 20px;
+  margin: auto;
+  text-align: center;
   
 }
 
@@ -66,8 +68,9 @@ button:hover {background-color: rgb(120, 118, 118)}
     color: black;
     position: relative;
     text-align: center;
-    font-size: 18px;
+    font-size: 20px;
     width: 100px;
+    border: 2px solid black;
   }
   
 
