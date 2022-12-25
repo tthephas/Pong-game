@@ -396,7 +396,7 @@ document.addEventListener('keyup', (e) => {
 
 //// Save our game interval to a variable so we can stop it when we want to
 // This interval runs the game loop every 60 ms till we tell it to stop. Going to 30 seems faster visually.
-const gameInterval = setInterval(gameLoop, 60)
+const gameInterval = setInterval(gameLoop, 50)
 // Function to stop game loop
 const stopGameLoop = () => {clearInterval(gameInterval)}
 
