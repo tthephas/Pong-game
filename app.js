@@ -41,6 +41,8 @@ levelCount.innerHTML = 1
 // livesCount.innerHTML = 3
 //window.location.replace("endPage.html")
 
+///////////////    VARIABLES FOR LEVELS PAST ONE, INCREASED DIFFICULTY ///////////
+
 
 
 // Set the game context to 2D
