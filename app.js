@@ -33,6 +33,10 @@ const message = document.getElementById('message')
 const scoreCount = document.getElementById('scorecount')
 scoreCount.innerHTML = 0
 
+/// Setup variable for level. Start at zero. Go up every 15 points. Then we'll increase difficulty as well.
+const levelCount = document.getElementById('levelcount')
+levelCount.innerHTML = 1
+
 
 
 // Set the game context to 2D
@@ -120,6 +124,8 @@ class Paddle {
         }
     }
 }
+
+
 
 class Ball {
     constructor(x, y, width, height, color) {
@@ -241,6 +247,8 @@ class Ball {
                     this.x = -50
                 }
             }
+        }
+
             /// going up and right
             if (this.direction.diagUpRight) {
                 this.y -= this.speed
@@ -276,7 +284,7 @@ class Ball {
                     ballOne.bounceDirectionDownLeft()
                 }
             }
-        }
+        
         // This puts a ball on board to start
         this.render = function () {
             ctx.fillStyle = this.color
@@ -318,6 +326,7 @@ const ballOne = new Ball(400, 50, 15, 12, 'black')
 // Ball seems to go thru paddle by a pixel, can account for this later
 // Counter to keep track of score
 counterForScore = 0
+counterForLevel = 1
 const detectHit = (thing) => {
     //Use a big if statement to see if any side of the ball hits any side of the paddle or walls.
     if (ballOne.x < thing.x + thing.width
@@ -332,6 +341,17 @@ const detectHit = (thing) => {
         // Counter starts at zero. Adds 1 here each time hits paddle. Only Goes up locally. Start at zero when reset/save. Posts in the inner HTML of that box. And also posts in message board when game ends. 
         scoreCount.innerHTML = counterForScore + 1
         counterForScore = counterForScore + 1
+
+        /// Place a level function here. Once score reaches a certain amount, the level increases, the level counter shows it.
+        if ((counterForScore >= 3) && (counterForScore < 6)) {
+            levelCount.innerHTML = counterForLevel + 1
+            
+        } else if ((counterForScore >= 7) && (counterForScore < 10)) {
+            levelCount.innerHTML = counterForLevel + 2
+            
+        }
+        
+
         // has a new direction on a hit
         // this worked. need to reverse for any direction
         ballOne.reverseDirection()
