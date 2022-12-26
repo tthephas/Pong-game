@@ -231,12 +231,13 @@ class Ball {
                     //try giving x a zero immediately. zero lets it show bottom right. negative 50 makes it disappear
                     this.x = -50
                     
+                    
                     /// not working. maybe place outside loop
                     /// need restart function first. when player loses, goes again, loses a life
                     //livesCount = livesCount - 1
                     //console.log(livesCount)
                     /// send page to end page when player has zero lives. Need to setup a life counter. then go down to zero. then this fires. 
-                    //window.location.replace("endPage.html")
+                    window.location.replace("endPage.html")
                 }
             }
             /// going down and left
@@ -260,7 +261,7 @@ class Ball {
                     /// not working yet
                     //livesCount = livesCount - 1
                     //console.log(livesCount)
-                    //window.location.replace("endPage.html")
+                    window.location.replace("endPage.html")
                 }
             }
         
@@ -389,7 +390,6 @@ const gameLoop = () => {
     // To resemble real movement, clear board every loop so that it doesnt look like a snake and keep showing previous move. Simulates moving with no tracks
     ctx.clearRect(0, 0, gameBoard.width, gameBoard.height)
 
-
     ////  LEAVE FOR NOW FOR TESTING PURPOSES ////
         
     // Hit detector at top so it takes precedence
@@ -437,7 +437,6 @@ const stopGameLoop = () => {clearInterval(gameInterval)}
 
 
 // Add an event listener, when DOM loads, run the game on an interval
-
 document.addEventListener('DOMContentLoaded', function () {
     // here is our game loop interval
     gameInterval
