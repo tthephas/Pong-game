@@ -237,8 +237,11 @@ class Ball {
                     //livesCount = livesCount - 1
                     //console.log(livesCount)
                     /// send page to end page when player has zero lives. Need to setup a life counter. then go down to zero. then this fires. 
-                    window.location.replace("endPage.html")
+                    // TURN OFF END PAGE FOR NOW, TESTING NEW LOOPS
+                    //window.location.replace("endPage.html")
+                    
                 }
+                
             }
             /// going down and left
             if (this.direction.diagDownLeft) {
@@ -261,8 +264,11 @@ class Ball {
                     /// not working yet
                     //livesCount = livesCount - 1
                     //console.log(livesCount)
-                    window.location.replace("endPage.html")
+                    // TURN OFF END PAGE FOR NOW, TESTING NEW LOOPS
+                    //window.location.replace("endPage.html")
+                    
                 }
+
             }
         
 
@@ -306,6 +312,12 @@ class Ball {
         this.render = function () {
             ctx.fillStyle = this.color
             ctx.fillRect(this.x, this.y, this.width, this.height)
+            
+            /// does this make a ball? yes! LOOKS LIKE ONE. DOESNT MOVE THOUGH
+            //ctx.beginPath()
+            //ctx.arc(400, 50, 10, 0, Math.PI * 2)
+            //ctx.fill()
+            //ctx.closePath()
         }
         /// this worked! but it just bounced once. i cannot right for every scenario. now need something to figure out how to flip the direction, no matter what it is.
         this.reverseDirection = function () {
@@ -403,7 +415,7 @@ const gameLoop = () => {
     movement.textContent = `${player.x}, ${player.y}`
     ballOne.render()
     ballOne.movePlayer()
-    //NEED TO BUILD OUT A ballOne.moveBall()
+    
 
 }
 
