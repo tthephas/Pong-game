@@ -19,10 +19,7 @@ const movement = document.getElementById('movement')
 // Create a status box. This will be a box to show messages. Example, you win, you lose, good luck. 
 const message = document.getElementById('message')
 
-//// TEST ONLY ////
-//Testing a message in message box works. Can use innerText
-//message.innerText ="hi is this working"
-//// TEST ONLY ////
+
 
 ////////////////////    BUILD OUT SCOREBOARD (BONUS, LEVELS AND LIVES) ///////////////////
 
@@ -36,6 +33,13 @@ scoreCount.innerHTML = 0
 /// Setup variable for level. Start at zero. Go up every 15 points. Then we'll increase difficulty as well.
 const levelCount = document.getElementById('levelcount')
 levelCount.innerHTML = 1
+
+/// FOR END GAME. just need to use this code to send to the end game screen after all lives are lost or when they lose regardless
+/// setup a life counter
+// need more work here. need function to start game over when player loses. then can count it. 
+// const livesCount = document.getElementById('livescount')
+// livesCount.innerHTML = 3
+//window.location.replace("endPage.html")
 
 
 
@@ -226,6 +230,13 @@ class Ball {
                     message.textContent = 'GAME OVER. You scored ' + counterForScore + ' points'
                     //try giving x a zero immediately. zero lets it show bottom right. negative 50 makes it disappear
                     this.x = -50
+                    
+                    /// not working. maybe place outside loop
+                    /// need restart function first. when player loses, goes again, loses a life
+                    //livesCount = livesCount - 1
+                    //console.log(livesCount)
+                    /// send page to end page when player has zero lives. Need to setup a life counter. then go down to zero. then this fires. 
+                    //window.location.replace("endPage.html")
                 }
             }
             /// going down and left
@@ -245,9 +256,14 @@ class Ball {
                     message.textContent = 'GAME OVER. You scored ' + counterForScore + ' points'
                     //try giving x a zero immediately. zero lets it show bottom right. negative 50 makes it disappear
                     this.x = -50
+                    
+                    /// not working yet
+                    //livesCount = livesCount - 1
+                    //console.log(livesCount)
+                    //window.location.replace("endPage.html")
                 }
             }
-        }
+        
 
             /// going up and right
             if (this.direction.diagUpRight) {
@@ -284,7 +300,7 @@ class Ball {
                     ballOne.bounceDirectionDownLeft()
                 }
             }
-        
+        }
         // This puts a ball on board to start
         this.render = function () {
             ctx.fillStyle = this.color
@@ -312,9 +328,7 @@ class Ball {
 const player = new Paddle(360, 335, 145, 8, 'black')
 const ballOne = new Ball(400, 50, 15, 12, 'black')
 
-// this was for testing only
-// player.render()
-// ballOne.render()
+
 
 
 /////    COLLISION  DETECTION ///////////
@@ -327,12 +341,18 @@ const ballOne = new Ball(400, 50, 15, 12, 'black')
 // Counter to keep track of score
 counterForScore = 0
 counterForLevel = 1
+// wait on this, need another function to start game over if life left
+///counterForLives = 3 
 const detectHit = (thing) => {
     //Use a big if statement to see if any side of the ball hits any side of the paddle or walls.
     if (ballOne.x < thing.x + thing.width
         && ballOne.x + ballOne.width > thing.x
         && ballOne.y < thing.y + thing.height
         && ballOne.y + ballOne.height > thing.y) {
+
+        // has a new direction on a hit
+        // this worked. need to reverse for any direction
+        ballOne.reverseDirection()
 
         //change the status box
         message.textContent = 'Ball hit paddle/wall'
@@ -350,11 +370,6 @@ const detectHit = (thing) => {
             levelCount.innerHTML = counterForLevel + 2
             
         }
-        
-
-        // has a new direction on a hit
-        // this worked. need to reverse for any direction
-        ballOne.reverseDirection()
     } 
 }
 
