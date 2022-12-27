@@ -339,7 +339,7 @@ class Ball {
 /// Player and ball are good size now. Will need to give player size a variable for later, to make the paddle shorter or longer based on level.
 // Paddle at 360x is about middle. Y 335 is just barely off bottom so that ball can visually pass the paddle if it gets by.
 /// Adding in a paddleWidth variable so that i can shrink it later when difficulty rises. Original 145.
-const player = new Paddle(360, 335, paddleWidth, 14, 'black')
+const player = new Paddle(360, 335, 145, 14, 'black')
 const ballOne = new Ball(400, 50, 15, 12, 'black')
 
 
@@ -370,7 +370,7 @@ const detectHit = (thing) => {
         
 
         //change the status box
-        message.textContent = 'Ball hit paddle/wall'
+        message.textContent = 'WOW you are doing so good'
 
 
         // Add to score counter
@@ -382,16 +382,24 @@ const detectHit = (thing) => {
         if ((counterForScore >= 10) && (counterForScore < 20)) {
             levelCount.innerHTML = counterForLevel + 1
             /// this worked. got ball to fly faster
-            ballOne.speed = 20
-            
-            
+            ballOne.speed = 15
+            message.textContent = 'You moved up a level, bravo'
         } else if ((counterForScore >= 20) && (counterForScore < 30)) {
             levelCount.innerHTML = counterForLevel + 2
             // this works but ball clearly goes thru paddle also
-            ballOne.speed = 25
-            
+            ballOne.speed = 19
+            message.textContent = 'You are a pro at this'
+        } else if ((counterForScore >= 30) && (counterForScore < 40)) {
+            levelCount.innerHTML = counterForLevel + 2
+            ballOne.speed = 23
+            message.textContent = 'This level is very tough'
+        } else if ((counterForScore >= 40) && (counterForScore < 50)) {
+            levelCount.innerHTML = counterForLevel + 2
+            player.width = 125
+            message.textContent = 'This level is very tough'
         }
-    } 
+        
+    }    
 }
 
 
