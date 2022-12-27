@@ -396,9 +396,8 @@ const detectHit = (thing) => {
         } else if ((counterForScore >= 40) && (counterForScore < 50)) {
             levelCount.innerHTML = counterForLevel + 2
             player.width = 125
-            message.textContent = 'This level is very tough'
+            message.textContent = 'Your paddle just shrunk'
         }
-        
     }    
 }
 
@@ -422,7 +421,7 @@ const gameLoop = () => {
 
     player.render()
     player.movePlayer()
-    movement.textContent = `${player.x}, ${player.y}`
+    //movement.textContent = `${player.x}, ${player.y}`
     ballOne.render()
     ballOne.movePlayer()
 }

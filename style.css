@@ -14,10 +14,10 @@ canvas {
     
 }
 #container {
-    width: 1000px;
+    width: 1150px;
     height: 550px;
     display: grid;
-    grid-template-columns: 200px 900px;
+    grid-template-columns: 200px 950px;
     margin: 0px 225px;
     text-align: center;
     font-size: 38px;
