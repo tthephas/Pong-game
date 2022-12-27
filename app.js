@@ -43,6 +43,16 @@ levelCount.innerHTML = 1
 
 ///////////////    VARIABLES FOR LEVELS PAST ONE, INCREASED DIFFICULTY ///////////
 
+///  We can do a few things to make the game harder. The ball can go faster. There can be two balls. The ball can bounce "oddly" or just travel "oddly", which means the x and y are different. The paddle can shrink in size too. Can make paddle slower as well but that might be too hard. 
+
+/// Didnt work up here. Trying to move them down to the hit detector. Cant move them there. Then program doesnt recognize them.
+///  35 seems EASY for paddle
+let paddleSpeed = 35
+/// 15 seems EASY for ball 
+let ballSpeed = 15
+/// 145 is what we started with
+let paddleWidth = 145
+
 
 
 // Set the game context to 2D
@@ -50,9 +60,7 @@ levelCount.innerHTML = 1
 // Tells code to work within the context of the canvas
 const ctx = gameBoard.getContext('2d')
 
-// Reminders about coordinates. Top left x,y coordinates, are 0,0. Bottom right will flex with the window, but are found thru ctx.w for width and ctx.h for height.
-// Will need the computed size of the canvas. Will refer to that later.
-// Once we get size of canvas, we can use those to simulate moves differently
+
 
 
 ////////////    SETUP  ////////////////
@@ -77,7 +85,7 @@ class Paddle {
         this.color = color
         // Property to help with moving. Changing this will make faster, moving more pixels per move. Make variable later to make difficulty higher.
         // 15 too slow. 35 is good for now.
-        this.speed = 35
+        this.speed = paddleSpeed
         // Add directions. The paddle can only move left and right. Leaving all four for now
         this.direction = {
             up: false,
@@ -94,13 +102,11 @@ class Paddle {
         // This sets direction for paddle to go that way
         // All four for now, but up down dropped later
         this.setDirection = function (key) {
-            console.log('this is the key in setDirection', key)
             if (key == 'ArrowLeft') { this.direction.left = true}
             if (key == 'ArrowRight') { this.direction.right = true}
         }
         //This unsets the direction and stops the paddle from moving that way
         this.unsetDirection = function (key) {
-            console.log('this is the key in UNsetDirection', key)
             if (key == 'ArrowLeft') { this.direction.left = false}
             if (key == 'ArrowRight') { this.direction.right = false}
         }        
@@ -141,7 +147,7 @@ class Ball {
         this.height = height
         this.color = color
         // Property to help with moving. Reminder that paddle is 35 now. Trying 5 for testing to see ball moving easier. 
-        this.speed = 15
+        this.speed = ballSpeed
         // Add directions. The ball can move all directions. 
         // Update. The ball can only move in some diagonal motion. Not straight up , down, left or right. taking out those elements.
         this.direction = {
@@ -157,7 +163,6 @@ class Ball {
  
         /// Lets give the ball a new function. This will listen for the arrow up (try to change later to space bar or any key) and just send the ball going down and to the right. 
         this.startDirection = function (key) {
-            console.log('BALL IS MOVING BABY!!', key)
             if (key == "ArrowUp") { this.direction.diagDownRight = true}
         }
 
@@ -166,45 +171,37 @@ class Ball {
         // these will only go in the part where the balls hit the walls
         // i will skip the one where it hits the bottom b/c the ball doesnt bounce from the bottom
         this.bounceDirectionDownLeft = function () {
-            console.log('i am bouncing down left')
             this.direction.diagUpLeft = false
             this.direction.diagDownLeft = true         
         }
         this.bounceDirectionDownRight = function () {
-            console.log('i am bouncing down Right')
             this.direction.diagUpRight = false
             this.direction.diagDownRight = true         
         }
         /// had to account for bouncing from down left from left wall and not just from ceiling
         this.bounceDirectionDownRightFromLeftWall = function () {
-            console.log('i am bouncing down Right')
             this.direction.diagDownLeft = false
             this.direction.diagDownRight = true         
         }
         /// SAME FOR RIGHT WALL had to account for bouncing from down right from right wall and not just from ceiling
         this.bounceDirectionDownLeftFromRightWall = function () {
-            console.log('i am bouncing down Right')
             this.direction.diagDownRight = false
             this.direction.diagDownLeft = true         
         }        
         this.bounceDirectionUpLeft = function () {
-            console.log('i am bouncing up left')
             this.direction.diagUpRight = false
             this.direction.diagUpLeft = true         
         }
         this.bounceDirectionUpRight = function () {
-            console.log('i am bouncing up right')
             this.direction.diagUpLeft = false
             this.direction.diagUpRight = true         
         }
         /// need to rebuild the up right and  up left ones for IF  they come off the paddle and not the wall
         this.bounceDirectionUpLeftFromPaddle = function () {
-            console.log('i am bouncing up left')
             this.direction.diagDownLeft = false
             this.direction.diagUpLeft = true         
         }
         this.bounceDirectionUpRightFromPaddle = function () {
-            console.log('i am bouncing up right')
             this.direction.diagDownRight = false
             this.direction.diagUpRight = true         
         }
@@ -323,13 +320,14 @@ class Ball {
         }
         /// this worked! but it just bounced once. i cannot right for every scenario. now need something to figure out how to flip the direction, no matter what it is.
         this.reverseDirection = function () {
-            console.log('should bounce either way')
+            
             if (this.direction.diagDownRight) {
                 ballOne.bounceDirectionUpRightFromPaddle()
             } else {
                 ballOne.bounceDirectionUpLeftFromPaddle()
             }
         }
+
     }
 }
 
@@ -340,7 +338,8 @@ class Ball {
 
 /// Player and ball are good size now. Will need to give player size a variable for later, to make the paddle shorter or longer based on level.
 // Paddle at 360x is about middle. Y 335 is just barely off bottom so that ball can visually pass the paddle if it gets by.
-const player = new Paddle(360, 335, 145, 8, 'black')
+/// Adding in a paddleWidth variable so that i can shrink it later when difficulty rises. Original 145.
+const player = new Paddle(360, 335, paddleWidth, 8, 'black')
 const ballOne = new Ball(400, 50, 15, 12, 'black')
 
 
@@ -368,9 +367,11 @@ const detectHit = (thing) => {
         // has a new direction on a hit
         // this worked. need to reverse for any direction
         ballOne.reverseDirection()
+        
 
         //change the status box
         message.textContent = 'Ball hit paddle/wall'
+
 
         // Add to score counter
         // Counter starts at zero. Adds 1 here each time hits paddle. Only Goes up locally. Start at zero when reset/save. Posts in the inner HTML of that box. And also posts in message board when game ends. 
@@ -378,11 +379,16 @@ const detectHit = (thing) => {
         counterForScore = counterForScore + 1
 
         /// Place a level function here. Once score reaches a certain amount, the level increases, the level counter shows it.
-        if ((counterForScore >= 3) && (counterForScore < 6)) {
+        if ((counterForScore >= 5) && (counterForScore < 10)) {
             levelCount.innerHTML = counterForLevel + 1
+            /// this worked. got ball to fly faster
+            ballOne.speed = 20
             
-        } else if ((counterForScore >= 7) && (counterForScore < 10)) {
+            
+        } else if ((counterForScore >= 11) && (counterForScore < 15)) {
             levelCount.innerHTML = counterForLevel + 2
+            // this works but ball clearly goes thru paddle also
+            ballOne.speed = 25
             
         }
     } 
@@ -418,6 +424,7 @@ const gameLoop = () => {
     ballOne.render()
     ballOne.movePlayer()
     
+    
 
 }
 
@@ -445,7 +452,7 @@ document.addEventListener('keyup', (e) => {
 
 //// Save our game interval to a variable so we can stop it when we want to
 // This interval runs the game loop every 60 ms till we tell it to stop. Going to 30 seems faster visually.
-const gameInterval = setInterval(gameLoop, 50)
+const gameInterval = setInterval(gameLoop, 40)
 // Function to stop game loop
 const stopGameLoop = () => {clearInterval(gameInterval)}
 
