@@ -339,7 +339,7 @@ class Ball {
 /// Player and ball are good size now. Will need to give player size a variable for later, to make the paddle shorter or longer based on level.
 // Paddle at 360x is about middle. Y 335 is just barely off bottom so that ball can visually pass the paddle if it gets by.
 /// Adding in a paddleWidth variable so that i can shrink it later when difficulty rises. Original 145.
-const player = new Paddle(360, 335, paddleWidth, 8, 'black')
+const player = new Paddle(360, 335, paddleWidth, 14, 'black')
 const ballOne = new Ball(400, 50, 15, 12, 'black')
 
 
@@ -379,13 +379,13 @@ const detectHit = (thing) => {
         counterForScore = counterForScore + 1
 
         /// Place a level function here. Once score reaches a certain amount, the level increases, the level counter shows it.
-        if ((counterForScore >= 5) && (counterForScore < 10)) {
+        if ((counterForScore >= 10) && (counterForScore < 20)) {
             levelCount.innerHTML = counterForLevel + 1
             /// this worked. got ball to fly faster
             ballOne.speed = 20
             
             
-        } else if ((counterForScore >= 11) && (counterForScore < 15)) {
+        } else if ((counterForScore >= 20) && (counterForScore < 30)) {
             levelCount.innerHTML = counterForLevel + 2
             // this works but ball clearly goes thru paddle also
             ballOne.speed = 25
@@ -402,30 +402,21 @@ const detectHit = (thing) => {
 // Setup game loop function, attached to an interval. will use same interval as canvas crawler to begin. Will simulate animation on screen
 
 const gameLoop = () => {
-    //////////TEST ONLY/////////
-    //no console logs here if you can avoid it
-    //console.log('its working')
-    ////////// TEST ONLY ////////////
     
     // To resemble real movement, clear board every loop so that it doesnt look like a snake and keep showing previous move. Simulates moving with no tracks
     ctx.clearRect(0, 0, gameBoard.width, gameBoard.height)
-
-    ////  LEAVE FOR NOW FOR TESTING PURPOSES ////
         
     // Hit detector at top so it takes precedence
     // This is working. Bouncing off walls and paddle. Message if hit paddle or bottom.
     detectHit(player)
 
-    ////////   ALOT MORE TO DO HERE  ////////
+    /// This starts the player and paddle in right place. Need to figure out how to do so after losing 1 life.
 
     player.render()
     player.movePlayer()
     movement.textContent = `${player.x}, ${player.y}`
     ballOne.render()
     ballOne.movePlayer()
-    
-    
-
 }
 
 ///////////    EVENT LISTENERS   //////////////
