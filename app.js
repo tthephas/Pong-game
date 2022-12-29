@@ -19,6 +19,15 @@ const movement = document.getElementById('movement')
 // Create a status box. This will be a box to show messages. Example, you win, you lose, good luck. 
 const message = document.getElementById('message')
 
+// Try creating a reset or start button to test out restarting after losing a life. Id is resetButton
+// One crude way is to just have a restart button on the page that reloads the page. But that resets the score and level as well. 
+const restartBoard = document.getElementById('resetButton')
+
+document.addEventListener('click', function () {
+    gameInterval
+    message.textContent = 'LOST LIFE, PRESS UP TO START AGAIN'
+})
+
 
 
 ////////////////////    BUILD OUT SCOREBOARD (BONUS, LEVELS AND LIVES) ///////////////////
@@ -451,7 +460,7 @@ document.addEventListener('keyup', (e) => {
 
 //// Save our game interval to a variable so we can stop it when we want to
 // This interval runs the game loop every 60 ms till we tell it to stop. Going to 30 seems faster visually.
-const gameInterval = setInterval(gameLoop, 40)
+const gameInterval = setInterval(gameLoop, 60)
 // Function to stop game loop
 const stopGameLoop = () => {clearInterval(gameInterval)}
 
@@ -462,4 +471,5 @@ document.addEventListener('DOMContentLoaded', function () {
     gameInterval
     message.textContent = 'PRESS UP ARROW TO START'
 })
+
 
