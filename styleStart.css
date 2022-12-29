@@ -71,6 +71,7 @@ button:hover {background-color: rgb(120, 118, 118)}
     font-size: 20px;
     width: 100px;
     border: 2px solid black;
+    cursor: pointer;
   }
   
 

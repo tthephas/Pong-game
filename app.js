@@ -49,7 +49,7 @@ levelCount.innerHTML = 1
 ///  35 seems EASY for paddle
 let paddleSpeed = 35
 /// 15 seems EASY for ball 
-let ballSpeed = 15
+let ballSpeed = 10
 /// 145 is what we started with
 let paddleWidth = 145
 
@@ -370,7 +370,7 @@ const detectHit = (thing) => {
         
 
         //change the status box
-        message.textContent = 'WOW you are doing so good'
+        message.textContent = 'WOW you are doing so good, on the first level'
 
 
         // Add to score counter
@@ -382,18 +382,19 @@ const detectHit = (thing) => {
         if ((counterForScore >= 10) && (counterForScore < 20)) {
             levelCount.innerHTML = counterForLevel + 1
             /// this worked. got ball to fly faster
-            ballOne.speed = 15
+            ballOne.speed = 12
             message.textContent = 'You moved up a level, bravo'
         } else if ((counterForScore >= 20) && (counterForScore < 30)) {
             levelCount.innerHTML = counterForLevel + 2
             // this works but ball clearly goes thru paddle also
-            ballOne.speed = 19
+            ballOne.speed = 15
             message.textContent = 'You are a pro at this'
         } else if ((counterForScore >= 30) && (counterForScore < 40)) {
             levelCount.innerHTML = counterForLevel + 2
-            ballOne.speed = 23
+            ballOne.speed = 18
             message.textContent = 'This level is very tough'
-        } else if ((counterForScore >= 40) && (counterForScore < 50)) {
+            // Final out here. can add more levels later
+        } else if (counterForScore >= 40) {
             levelCount.innerHTML = counterForLevel + 2
             player.width = 125
             message.textContent = 'Your paddle just shrunk'
