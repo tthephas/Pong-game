@@ -23,7 +23,7 @@ const message = document.getElementById('message')
 // One crude way is to just have a restart button on the page that reloads the page. But that resets the score and level as well. 
 const restartBoard = document.getElementById('resetButton')
 
-document.addEventListener('click', function () {
+restartBoard.addEventListener('click', function () {
     gameInterval
     message.textContent = 'LOST LIFE, PRESS UP TO START AGAIN'
 })
