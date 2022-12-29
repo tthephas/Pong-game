@@ -21,10 +21,13 @@ const message = document.getElementById('message')
 
 // Try creating a reset or start button to test out restarting after losing a life. Id is resetButton
 // One crude way is to just have a restart button on the page that reloads the page. But that resets the score and level as well. 
+// This only flashes the new message. Does not fully restart the board. 
+// Not totally working. Got message to change. loop to stop. but cant get it going again.
+
 const restartBoard = document.getElementById('resetButton')
 
 restartBoard.addEventListener('click', function () {
-    gameInterval
+    stopGameLoop()
     message.textContent = 'LOST LIFE, PRESS UP TO START AGAIN'
 })
 
@@ -59,7 +62,7 @@ levelCount.innerHTML = 1
 let paddleSpeed = 35
 /// 15 seems EASY for ball 
 let ballSpeed = 10
-// adding in an X speed that is different than other speed (y speed) to see if ball then moves erratically instead of perfect diagonals. This worked but not erratic enough
+// adding in an X speed that is different than other speed (y speed) to see if ball then moves erratically instead of perfect diagonals. This worked but not erratic enough.
 let ballSpeedX = 11
 /// 145 is what we started with
 let paddleWidth = 145
@@ -399,7 +402,7 @@ const detectHit = (thing) => {
         } else if ((counterForScore >= 20) && (counterForScore < 30)) {
             levelCount.innerHTML = counterForLevel + 2
             // this works but ball clearly goes thru paddle also
-            ballOne.speed = 15
+            ballOne.speedX = 15
             message.textContent = 'You are a pro at this'
         } else if ((counterForScore >= 30) && (counterForScore < 40)) {
             levelCount.innerHTML = counterForLevel + 2
@@ -416,7 +419,7 @@ const detectHit = (thing) => {
             message.textContent = 'Your paddle just shrunk, again'
         }  else if ((counterForScore >= 60) && (counterForScore < 70))  {
             levelCount.innerHTML = counterForLevel + 2
-            ballOne.speed = 21
+            ballOne.speedX = 21
             message.textContent = 'Things just got faster'
         }
     }    
@@ -474,6 +477,8 @@ document.addEventListener('keyup', (e) => {
 const gameInterval = setInterval(gameLoop, 40)
 // Function to stop game loop
 const stopGameLoop = () => {clearInterval(gameInterval)}
+
+
 
 
 // Add an event listener, when DOM loads, run the game on an interval
