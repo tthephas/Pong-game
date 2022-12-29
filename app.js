@@ -59,6 +59,8 @@ levelCount.innerHTML = 1
 let paddleSpeed = 35
 /// 15 seems EASY for ball 
 let ballSpeed = 10
+// adding in an X speed that is different than other speed (y speed) to see if ball then moves erratically instead of perfect diagonals. This worked but not erratic enough
+let ballSpeedX = 11
 /// 145 is what we started with
 let paddleWidth = 145
 
@@ -157,6 +159,7 @@ class Ball {
         this.color = color
         // Property to help with moving. Reminder that paddle is 35 now. Trying 5 for testing to see ball moving easier. 
         this.speed = ballSpeed
+        this.speedX = ballSpeedX
         // Add directions. The ball can move all directions. 
         // Update. The ball can only move in some diagonal motion. Not straight up , down, left or right. taking out those elements.
         this.direction = {
@@ -223,7 +226,7 @@ class Ball {
             if (this.direction.diagDownRight) {
                 // got one ball to move diagonal!!! later can mess with more x or y to make not diagonal. can mess with the speed variable
                 this.y += this.speed
-                this.x += this.speed
+                this.x += this.speedX
                 /// this stopped it
                 /// instead of stopping it. lets bounce it back. 
                 if (this.x + this.width >= gameBoard.width) {
@@ -254,7 +257,7 @@ class Ball {
             /// going down and left
             if (this.direction.diagDownLeft) {
                 this.y += this.speed
-                this.x -= this.speed
+                this.x -= this.speedX
                 /// this stopped it
                 if (this.x <= 0) {
                     this.x = 0
@@ -283,7 +286,7 @@ class Ball {
             /// going up and right
             if (this.direction.diagUpRight) {
                 this.y -= this.speed
-                this.x += this.speed
+                this.x += this.speedX
                 /// this stopped it
                 if (this.x + this.width >= gameBoard.width) {
                     this.x = gameBoard.width - this.width
@@ -297,7 +300,7 @@ class Ball {
             /// going up and left
             if (this.direction.diagUpLeft) {
                 this.y -= this.speed
-                this.x -= this.speed
+                this.x -= this.speedX
                 /// this stopped it
                 if (this.x <= 0) {
                     /// try to bounce it back instead of stop
@@ -403,10 +406,18 @@ const detectHit = (thing) => {
             ballOne.speed = 18
             message.textContent = 'This level is very tough'
             // Final out here. can add more levels later
-        } else if (counterForScore >= 40) {
+        } else if ((counterForScore >= 40) && (counterForScore < 50)) {
             levelCount.innerHTML = counterForLevel + 2
             player.width = 125
             message.textContent = 'Your paddle just shrunk'
+        } else if ((counterForScore >= 50) && (counterForScore < 60))  {
+            levelCount.innerHTML = counterForLevel + 2
+            player.width = 105
+            message.textContent = 'Your paddle just shrunk, again'
+        }  else if ((counterForScore >= 60) && (counterForScore < 70))  {
+            levelCount.innerHTML = counterForLevel + 2
+            ballOne.speed = 21
+            message.textContent = 'Things just got faster'
         }
     }    
 }
@@ -459,8 +470,8 @@ document.addEventListener('keyup', (e) => {
 })
 
 //// Save our game interval to a variable so we can stop it when we want to
-// This interval runs the game loop every 60 ms till we tell it to stop. Going to 30 seems faster visually.
-const gameInterval = setInterval(gameLoop, 60)
+// This interval runs the game loop every 60 ms till we tell it to stop. Going to 30 seems faster visually. 60 is too easy to start.
+const gameInterval = setInterval(gameLoop, 40)
 // Function to stop game loop
 const stopGameLoop = () => {clearInterval(gameInterval)}
 
