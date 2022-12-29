@@ -19,17 +19,7 @@ const movement = document.getElementById('movement')
 // Create a status box. This will be a box to show messages. Example, you win, you lose, good luck. 
 const message = document.getElementById('message')
 
-// Try creating a reset or start button to test out restarting after losing a life. Id is resetButton
-// One crude way is to just have a restart button on the page that reloads the page. But that resets the score and level as well. 
-// This only flashes the new message. Does not fully restart the board. 
-// Not totally working. Got message to change. loop to stop. but cant get it going again.
 
-const restartBoard = document.getElementById('resetButton')
-
-restartBoard.addEventListener('click', function () {
-    stopGameLoop()
-    message.textContent = 'LOST LIFE, PRESS UP TO START AGAIN'
-})
 
 
 
@@ -45,6 +35,10 @@ scoreCount.innerHTML = 0
 /// Setup variable for level. Start at zero. Go up every 15 points. Then we'll increase difficulty as well.
 const levelCount = document.getElementById('levelcount')
 levelCount.innerHTML = 1
+
+/// Setup variable for lives. Start at three. Go down one every restart. Figure out way to end at zero.
+const livesCount = document.getElementById('livescount')
+livesCount.innerHTML = 3
 
 /// FOR END GAME. just need to use this code to send to the end game screen after all lives are lost or when they lose regardless
 /// setup a life counter
@@ -489,3 +483,20 @@ document.addEventListener('DOMContentLoaded', function () {
 })
 
 
+// Try creating a reset or start button to test out restarting after losing a life. Id is resetButton
+// One crude way is to just have a restart button on the page that reloads the page. But that resets the score and level as well. 
+// This only flashes the new message. Does not fully restart the board. 
+// Not totally working. Got message to change. loop to stop. but cant get it going again.
+counterForLives = 3
+const restartBoard = document.getElementById('resetButton')
+
+// Restart button is taking a life but is not restarting the ball in correct position
+restartBoard.addEventListener('click', function () {
+    stopGameLoop()
+    message.textContent = 'LOST LIFE, PRESS UP TO START AGAIN'
+    gameInterval
+        // Take from  lives counter
+        // Counter starts at three. Takes 1 here each time hits bottom. Posts in the inner HTML of that box. 
+        livesCount.innerHTML = counterForLives - 1
+        counterForLives = counterForLives - 1
+})
