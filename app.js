@@ -415,6 +415,10 @@ const detectHit = (thing) => {
             levelCount.innerHTML = counterForLevel + 2
             ballOne.speedX = 21
             message.textContent = 'Things just got faster'
+        }  else if ((counterForScore >= 70) && (counterForScore < 80))  {
+            levelCount.innerHTML = counterForLevel + 2
+            ballOne.speed = 24
+            message.textContent = 'Things just got super fast'
         }
     }    
 }
@@ -499,4 +503,7 @@ restartBoard.addEventListener('click', function () {
         // Counter starts at three. Takes 1 here each time hits bottom. Posts in the inner HTML of that box. 
         livesCount.innerHTML = counterForLives - 1
         counterForLives = counterForLives - 1
+        if (counterForLives === 0) {
+            window.location.replace("endPage.html")
+        }
 })
