@@ -42,6 +42,8 @@ levelCount.innerHTML = 1
 const livesCount = document.getElementById('livescount')
 livesCount.innerHTML = 3
 
+counterForLives = 3
+
 /// FOR END GAME. just need to use this code to send to the end game screen after all lives are lost or when they lose regardless
 /// setup a life counter
 // need more work here. need function to start game over when player loses. then can count it. 
@@ -236,7 +238,7 @@ class Ball {
                 //// need to stop the ball right when bottom is hit, for visual reality look
                 if (this.y + this.height >= gameBoard.height) {
                     this.y = gameBoard.height - this.height
-                    message.textContent = 'GAME OVER. You scored ' + counterForScore + ' points'
+                    message.textContent = 'Life lost, you have ' + counterForScore + ' points. Press UP to start'
                     //try giving x a zero immediately. zero lets it show bottom right. negative 50 makes it disappear
                     
                     
@@ -283,7 +285,7 @@ class Ball {
                 //// need to stop the ball right when bottom is hit, for visual reality look
                 if (this.y + this.height >= gameBoard.height) {
                     this.y = gameBoard.height - this.height
-                    message.textContent = 'GAME OVER. You scored ' + counterForScore + ' points'
+                    message.textContent = 'Life lost, you have ' + counterForScore + ' points. Press UP to start'
                     //try giving x a zero immediately. zero lets it show bottom right. negative 50 makes it disappear
                     
                     
@@ -509,22 +511,22 @@ document.addEventListener('keyup', (e) => {
 // One crude way is to just have a restart button on the page that reloads the page. But that resets the score and level as well. 
 // This only flashes the new message. Does not fully restart the board. 
 // Not totally working. Got message to change. loop to stop. but cant get it going again.
-counterForLives = 3
-const restartBoard = document.getElementById('resetButton')
+// counterForLives = 3
+// const restartBoard = document.getElementById('resetButton')
 
-// Restart button is taking a life but is not restarting the ball in correct position
-restartBoard.addEventListener('click', function () {
-    //stopGameLoop()
-    // message.textContent = 'LOST LIFE, PRESS UP TO START AGAIN'
+// // Restart button is taking a life but is not restarting the ball in correct position
+// restartBoard.addEventListener('click', function () {
+//     //stopGameLoop()
+//     // message.textContent = 'LOST LIFE, PRESS UP TO START AGAIN'
     
-    console.log('trying to restart game with this button')
+//     console.log('trying to restart game with this button')
         
-        //resets ball to correct spot but sends it flying and twice the speed
+//         //resets ball to correct spot but sends it flying and twice the speed
 
-        gameInterval()
+//         gameInterval()
 
 
-})
+// })
 
 //// Save our game interval to a variable so we can stop it when we want to
 // This interval runs the game loop every 60 ms till we tell it to stop. Going to 30 seems faster visually. 60 is too easy to start.
