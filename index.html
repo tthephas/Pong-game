@@ -7,11 +7,12 @@
     <title>Pong</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<!-- /* put the start body here */ -->
+<!-- /* put the start div here */ -->
 
-<!-- <body id="wholeStartBody">
-    <h1>WELCOME TO PONG</h1>
-    <div class="allButtons"> 
+<body >
+<div id="wholeStartBody">
+    <h1 id="startHeader">WELCOME TO PONG</h1>
+    <div id="startButton" class="allButtons"> 
         <button class="instructions" onclick="popUpInstructions()">Instructions</button>
         <div class="instructions-popup" id="myInstructions">
             <form action="/action_page.php" class="instructions-container">
@@ -25,18 +26,20 @@
             </form>
         </div>  
     </div>
-    <div class="allButtons">
+    <div id="startButton" class="allButtons">
         <a href="index.html">
         <button class="startGame">Start Game</button> 
         </a>
     </div>
 
     <script src="appStart.js"></script>
-</body> -->
+</div>
 
-<!-- then the game body  -->
 
-<body id="wholeGameBody">
+<!-- then the game body-->
+
+
+<div id="wholeGameBody">
     <h1>PONG</h1>
     <div id="container">
         <div class="stats" id="level">Level</div>
@@ -55,11 +58,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     
     <script src="app.js"></script>
-</body>
+</div>
+
 
 <!-- then the end body -->
 
-<!-- <body id="wholeEndBody">
+
+<div id="wholeEndBody">
     <h1>GAME OVER</h1>
     <div class="allButtons">
         <a href="index.html">
@@ -69,7 +74,8 @@
     
 
     <script src="appEnd.js"></script>
-</body> -->
+</div>
+</body>
 
 
 </html>

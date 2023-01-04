@@ -3,41 +3,32 @@ body {
     font-family: 'Press Start 2P', cursive;
 }
 
-h1 {
+#startButton {
+  height: 100px;
+  width: 400px;
+  text-align: center;
+  font-size: 50px;
+  margin: 20px 600px;
+  background-color: lightgray;
+  cursor: pointer;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+  /* outline: none; */
+  border: 2px solid grey;
+  font-family: 'Press Start 2P', cursive;
+}
+
+#startHeader {
     text-align: center;
     font-size: 125px;
     margin: 45px 25px;
 }
 
-button {
-    height: 100px;
-    width: 400px;
-    text-align: center;
-    font-size: 50px;
-    margin: 20px 600px;
-    background-color: lightgray;
-    cursor: pointer;
-    border-radius: 15px;
-    box-shadow: 0 9px #999;
-    outline: none;
-    border: 2px solid grey;
-    font-family: 'Press Start 2P', cursive;
-    
-}
+
 
 button:hover {background-color: rgb(120, 118, 118)}
 
 
-/* INSTRUCTIONS CSS */
-/* Popup container */
-/* Button used to open the contact form - fixed at the bottom of the page */
-/* .instructions {
-  
-  padding: 25px;
-  border: none;
-  cursor: pointer;
-
-} */
 
 /* The popup form - hidden by default */
 .instructions-popup {

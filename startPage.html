@@ -7,9 +7,9 @@
     <title>Pong Start Game</title>
     <link rel="stylesheet" href="styleStart.css">
 </head>
-<body id="wholeStartBody">
-    <h1>WELCOME TO PONG</h1>
-    <div class="allButtons"> 
+<body >
+    <h1 id="startHeader">WELCOME TO PONG</h1>
+    <div id="startButton" > 
         <button class="instructions" onclick="popUpInstructions()">Instructions</button>
         <div class="instructions-popup" id="myInstructions">
             <form action="/action_page.php" class="instructions-container">
@@ -23,7 +23,7 @@
             </form>
         </div>  
     </div>
-    <div class="allButtons">
+    <div id="startButton"  >
         <a href="index.html">
         <button class="startGame">Start Game</button> 
         </a>

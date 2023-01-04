@@ -540,11 +540,10 @@ const stopGameLoop = () => {
         counterForLives = counterForLives - 1
         
         // this made the entire body disappear
-        if (counterForLives === 2) {
-            document.getElementById("wholeGameBody").style.display = 'none';
-            document.getElementById("wholeStartBody").style.display = 'inline-block';
-            
-        }
+        // if (counterForLives === 2) {
+        //     document.getElementById("wholeGameBody").style.display = 'none';
+        //     document.getElementById("wholeEndBody").style.display = 'inline-block';
+        // }
 
 
         if (counterForLives === 0) {
@@ -554,17 +553,19 @@ const stopGameLoop = () => {
 }
 
 
-
+    // lets try to open with the start page. the other two will be hidden
+    // document.getElementById("wholeStartBody").style.display = 'none'
+    // document.getElementById("wholeGameBody").style.display = 'none'
+    // document.getElementById("wholeEndBody").style.display = 'inline-block'
 
 // Add an event listener, when DOM loads, run the game on an interval
 document.addEventListener('DOMContentLoaded', function () {
     // here is our game loop interval
-    gameInterval()
-    message.textContent = 'PRESS UP ARROW TO START'
+    // gameInterval()
+    // message.textContent = 'PRESS UP ARROW TO START'
 
+    document.getElementById("wholeStartBody").style.display = ''
+    document.getElementById("wholeGameBody").style.display = 'none'
+    document.getElementById("wholeEndBody").style.display = 'none'
 
-    // lets try to open with the start page. the other two will be hidden
-    // document.getElementById("wholeStartBody").hidden=false
-    // document.getElementById("wholeGameBody").hidden=true
-    // document.getElementById("wholeEndBody").hidden=true
 })
