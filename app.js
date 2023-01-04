@@ -565,8 +565,8 @@ document.addEventListener('DOMContentLoaded', function () {
     gameInterval()
     message.textContent = 'PRESS UP ARROW TO START'
 
-    document.getElementById("wholeStartBody").style.display = ''
-    document.getElementById("wholeGameBody").style.display = 'none'
+    document.getElementById("wholeStartBody").style.display = 'none'
+    document.getElementById("wholeGameBody").style.display = ''
     document.getElementById("wholeEndBody").style.display = 'none'
 
 })
