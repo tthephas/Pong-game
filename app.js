@@ -516,15 +516,10 @@ document.addEventListener('keyup', (e) => {
 
 // // Restart button is taking a life but is not restarting the ball in correct position
 // restartBoard.addEventListener('click', function () {
-//     //stopGameLoop()
-//     // message.textContent = 'LOST LIFE, PRESS UP TO START AGAIN'
-    
-//     console.log('trying to restart game with this button')
-        
-//         //resets ball to correct spot but sends it flying and twice the speed
 
-//         gameInterval()
-
+//     //using button as tester to hide html features
+//     console.log('trying to hide html with this button')
+//     document.getElementById("container").hidden=true
 
 // })
 
@@ -543,6 +538,15 @@ const stopGameLoop = () => {
         // Counter starts at three. Takes 1 here each time hits bottom. Posts in the inner HTML of that box. 
         livesCount.innerHTML = counterForLives - 1
         counterForLives = counterForLives - 1
+        
+        // this made the entire body disappear
+        if (counterForLives === 2) {
+            document.getElementById("wholeGameBody").style.display = 'none';
+            document.getElementById("wholeStartBody").style.display = 'inline-block';
+            
+        }
+
+
         if (counterForLives === 0) {
             window.location.replace("endPage.html")
         }
@@ -557,4 +561,10 @@ document.addEventListener('DOMContentLoaded', function () {
     // here is our game loop interval
     gameInterval()
     message.textContent = 'PRESS UP ARROW TO START'
+
+
+    // lets try to open with the start page. the other two will be hidden
+    // document.getElementById("wholeStartBody").hidden=false
+    // document.getElementById("wholeGameBody").hidden=true
+    // document.getElementById("wholeEndBody").hidden=true
 })
