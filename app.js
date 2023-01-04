@@ -518,13 +518,7 @@ restartBoard.addEventListener('click', function () {
     // message.textContent = 'LOST LIFE, PRESS UP TO START AGAIN'
     
     console.log('trying to restart game with this button')
-        // Take from  lives counter
-        // Counter starts at three. Takes 1 here each time hits bottom. Posts in the inner HTML of that box. 
-        // livesCount.innerHTML = counterForLives - 1
-        // counterForLives = counterForLives - 1
-        // if (counterForLives === 0) {
-        //     window.location.replace("endPage.html")
-        // }
+        
         //resets ball to correct spot but sends it flying and twice the speed
 
         gameInterval()
@@ -543,6 +537,13 @@ const gameInterval = () => {
 // Function to stop game loop
 const stopGameLoop = () => {
     clearInterval(gameInterval)
+        // Take from  lives counter
+        // Counter starts at three. Takes 1 here each time hits bottom. Posts in the inner HTML of that box. 
+        livesCount.innerHTML = counterForLives - 1
+        counterForLives = counterForLives - 1
+        if (counterForLives === 0) {
+            window.location.replace("endPage.html")
+        }
 
 }
 
