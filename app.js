@@ -238,10 +238,11 @@ class Ball {
                     this.y = gameBoard.height - this.height
                     message.textContent = 'GAME OVER. You scored ' + counterForScore + ' points'
                     //try giving x a zero immediately. zero lets it show bottom right. negative 50 makes it disappear
-                    this.x = -50
                     
+                    
+                    this.x = -50
                     stopGameLoop()
-                    console.log('i stopped the game loop successfully')
+                    
                     
                     /// not working. maybe place outside loop
                     /// need restart function first. when player loses, goes again, loses a life
@@ -271,12 +272,12 @@ class Ball {
                     this.y = gameBoard.height - this.height
                     message.textContent = 'GAME OVER. You scored ' + counterForScore + ' points'
                     //try giving x a zero immediately. zero lets it show bottom right. negative 50 makes it disappear
-                    this.x = -50
                     
+                    this.x = -50
                     /// not working yet
                     //livesCount = livesCount - 1
                     stopGameLoop()
-                    console.log('i stopped the game loop successfully')
+                    
                     
                     //console.log(livesCount)
                     // TURN OFF END PAGE FOR NOW, TESTING NEW LOOPS
@@ -383,7 +384,9 @@ const detectHit = (thing) => {
         // has a new direction on a hit
         // this worked. need to reverse for any direction
         ballOne.reverseDirection()
-        
+
+
+
 
         //change the status box
         message.textContent = 'WOW you are doing so good, on the first level'
@@ -426,7 +429,7 @@ const detectHit = (thing) => {
             levelCount.innerHTML = counterForLevel + 2
             ballOne.speed = 24
             message.textContent = 'Things just got super fast'
-        }
+        }  
     }    
 }
 
@@ -483,7 +486,10 @@ document.addEventListener('keyup', (e) => {
 const gameInterval = setInterval(gameLoop, 40)
 
 // Function to stop game loop
-const stopGameLoop = () => {clearInterval(gameInterval)}
+const stopGameLoop = () => {
+    clearInterval(gameInterval)
+    console.log('i stopped the game loop successfully')
+}
 
 // Try setting up new function to use in restart button.
 // didnt work, neverending loop, maybe thinks ball still at bottom. 
@@ -510,7 +516,7 @@ restartBoard.addEventListener('click', function () {
         //     window.location.replace("endPage.html")
         // }
         ctx.clearRect(0, 0, gameBoard.width, gameBoard.height)
-        gameInterval
+        gameInterval()
 
 })
 
