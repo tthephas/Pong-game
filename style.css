@@ -2,11 +2,27 @@ body {
     background-color: green;
     font-family: 'Press Start 2P', cursive;
 }
-h1 {
+#wholeStartBody {
+    width: 100vw;
+    height: 100vh;
+}
+
+#wholeGameBody {
+    width: 100vw;
+    height: 100vh;
+}
+
+#wholeEndBody {
+    width: 100vw;
+    height: 100vh;
+}
+
+#gameHeader {
     text-align: center;
     font-size: 128px;
     margin: 15px 50px;
 }
+
 canvas {
     background-color: lightgray;
     width: 100%;
@@ -23,7 +39,6 @@ canvas {
     font-size: 38px;
     border: 1px solid black;
     
-
 }
 .stats {
     border: 5px solid rgb(37, 64, 73);
@@ -78,4 +93,87 @@ main {
     grid-row: 1 / 7;
     background-color: rgb(101, 84, 84);
     border: 5px solid black;
+}
+
+
+#startButton {
+    height: 100px;
+    width: 400px;
+    text-align: center;
+    font-size: 50px;
+    margin: 20px 600px;
+    background-color: lightgray;
+    cursor: pointer;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+    /* outline: none; */
+    border: 2px solid grey;
+    font-family: 'Press Start 2P', cursive;
+}
+  
+#startHeader {
+    text-align: center;
+    font-size: 125px;
+    margin: 45px 25px;
+}
+  
+  
+  
+button:hover {background-color: rgb(120, 118, 118)}
+  
+  
+  
+/* The popup form - hidden by default */
+.instructions-popup {
+    display: none;
+    position: fixed;
+    top: 300px;
+    right: 75px;
+    border: 3px solid #f1f1f1;
+    z-index: 9;
+}
+  
+/* Add styles to the form container */
+.instructions-container {
+    max-width: 500px;
+    padding: 15px;
+    background-color: lightgray;
+    color: black;
+    font-size: 20px;
+    margin: auto;
+    text-align: center;
+    
+}
+  
+  
+  /* Add a red background color to the cancel button */
+.instructions-popup-cancel {
+    background-color: rgb(238, 102, 102);
+    color: black;
+    position: relative;
+    text-align: center;
+    font-size: 20px;
+    width: 100px;
+    border: 2px solid black;
+    cursor: pointer;
+}
+
+#endHeader {
+    text-align: center;
+    font-size: 125px;
+    margin: 45px 50px;
+}
+#endButton {
+    height: 100px;
+    width: 400px;
+    text-align: center;
+    font-size: 50px;
+    margin: 40px 600px;
+    background-color: lightgray;
+    cursor: pointer;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+    outline: none;
+    border: 2px solid grey;
+    font-family: 'Press Start 2P', cursive;
 }

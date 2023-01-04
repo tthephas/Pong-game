@@ -7,8 +7,40 @@
     <title>Pong</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <h1>PONG</h1>
+<!-- /* put the start div here */ -->
+
+<body >
+<div id="wholeStartBody">
+    <h1 id="startHeader">WELCOME TO PONG</h1>
+    <div id="startButton" class="allButtons"> 
+        <button class="instructions" onclick="popUpInstructions()">Instructions</button>
+        <div class="instructions-popup" id="myInstructions">
+            <form action="/action_page.php" class="instructions-container">
+              <h3>Start ball moving by pressing the UP arrow <br><br>
+                Use the LEFT and RIGHT arrows to move your paddle <br><br>
+                Don't let the ball hit the ground !!!<br><br>
+                Score one point for every time the ball hits your paddle<br><br>
+                Move up levels every 10 points</h3>
+              <h2 class="instructions-popup-cancel" onclick="closeForm()">CLOSE</h2>
+
+            </form>
+        </div>  
+    </div>
+    <div id="startButton" class="allButtons">
+        <a href="index.html">
+        <button class="startGame">Start Game</button> 
+        </a>
+    </div>
+
+    
+</div>
+
+
+<!-- then the game body-->
+
+
+<div id="wholeGameBody">
+    <h1 id="gameHeader">PONG</h1>
     <div id="container">
         <div class="stats" id="level">Level</div>
         <div class="stats" id="levelcount">11</div>
@@ -22,12 +54,27 @@
         <div class="stats" id="movement"><br></br></div>
         
         <div class="stats" id="message">HOLD FOR MESSAGES</div>
-
-
     </div>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     
-    <script src="app.js"></script>
+    
+</div>
+
+
+<!-- then the end body -->
+
+
+<div id="wholeEndBody">
+    <h1 id="endHeader">GAME OVER</h1>
+    <div id="endButton" class="allButtons">
+        <a href="index.html">
+        <button class="startGame">Play Again</button> 
+        </a>
+    </div>
+</div>
+<script src="app.js"></script>
 </body>
+
+
 </html>
 

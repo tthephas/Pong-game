@@ -516,15 +516,10 @@ document.addEventListener('keyup', (e) => {
 
 // // Restart button is taking a life but is not restarting the ball in correct position
 // restartBoard.addEventListener('click', function () {
-//     //stopGameLoop()
-//     // message.textContent = 'LOST LIFE, PRESS UP TO START AGAIN'
-    
-//     console.log('trying to restart game with this button')
-        
-//         //resets ball to correct spot but sends it flying and twice the speed
 
-//         gameInterval()
-
+//     //using button as tester to hide html features
+//     console.log('trying to hide html with this button')
+//     document.getElementById("container").hidden=true
 
 // })
 
@@ -543,18 +538,46 @@ const stopGameLoop = () => {
         // Counter starts at three. Takes 1 here each time hits bottom. Posts in the inner HTML of that box. 
         livesCount.innerHTML = counterForLives - 1
         counterForLives = counterForLives - 1
+        
+        // this made the entire body disappear
+        // if (counterForLives === 2) {
+        //     document.getElementById("wholeGameBody").style.display = 'none';
+        //     document.getElementById("wholeEndBody").style.display = 'inline-block';
+        // }
+
+
         if (counterForLives === 0) {
-            window.location.replace("endPage.html")
+            document.getElementById("wholeGameBody").style.display = 'none'
+            document.getElementById("wholeEndBody").style.display = ''
         }
 
 }
 
 
-
+    // lets try to open with the start page. the other two will be hidden
+    // document.getElementById("wholeStartBody").style.display = 'none'
+    // document.getElementById("wholeGameBody").style.display = 'none'
+    // document.getElementById("wholeEndBody").style.display = 'inline-block'
 
 // Add an event listener, when DOM loads, run the game on an interval
 document.addEventListener('DOMContentLoaded', function () {
     // here is our game loop interval
     gameInterval()
     message.textContent = 'PRESS UP ARROW TO START'
+
+    document.getElementById("wholeStartBody").style.display = 'none'
+    document.getElementById("wholeGameBody").style.display = ''
+    document.getElementById("wholeEndBody").style.display = 'none'
+
 })
+
+// Start page functions
+/// Make a pop up function for the instructions. When a user hits the button, a pop up comes up and tells the user how to play
+
+const popUpInstructions = () => {
+    document.getElementById("myInstructions").style.display = "block";
+  }
+  
+  function closeForm() {
+    document.getElementById("myInstructions").style.display = "none";
+  }
