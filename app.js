@@ -240,10 +240,21 @@ class Ball {
                     //try giving x a zero immediately. zero lets it show bottom right. negative 50 makes it disappear
                     
                     
-                    this.x = -50
+                    
                     stopGameLoop()
+
+                    ballOne.x = 400
+                    ballOne.y = 50
                     
-                    
+                    this.direction = {
+
+                        ///add in a diagonal. down/right to start
+                        diagDownRight: false,
+                        diagUpRight: false,
+                        diagDownLeft: false,
+                        diagUpLeft: false
+                    }
+
                     /// not working. maybe place outside loop
                     /// need restart function first. when player loses, goes again, loses a life
                     //livesCount = livesCount - 1
@@ -273,10 +284,22 @@ class Ball {
                     message.textContent = 'GAME OVER. You scored ' + counterForScore + ' points'
                     //try giving x a zero immediately. zero lets it show bottom right. negative 50 makes it disappear
                     
-                    this.x = -50
+                    
                     /// not working yet
                     //livesCount = livesCount - 1
                     stopGameLoop()
+
+                    ballOne.x = 400
+                    ballOne.y = 50
+
+                    this.direction = {
+
+                        ///add in a diagonal. down/right to start
+                        diagDownRight: false,
+                        diagUpRight: false,
+                        diagDownLeft: false,
+                        diagUpLeft: false
+                    }
                     
                     
                     //console.log(livesCount)
@@ -360,8 +383,6 @@ const player = new Paddle(360, 335, 145, 14, 'black')
 const ballOne = new Ball(400, 50, 15, 12, 'black')
 
 
-
-
 /////    COLLISION  DETECTION ///////////
 
 
@@ -385,12 +406,8 @@ const detectHit = (thing) => {
         // this worked. need to reverse for any direction
         ballOne.reverseDirection()
 
-
-
-
         //change the status box
-        message.textContent = 'WOW you are doing so good, on the first level'
-
+        message.textContent = 'Good job, but the first level is EASY'
 
         // Add to score counter
         // Counter starts at zero. Adds 1 here each time hits paddle. Only Goes up locally. Start at zero when reset/save. Posts in the inner HTML of that box. And also posts in message board when game ends. 
@@ -480,17 +497,6 @@ document.addEventListener('keyup', (e) => {
     }
 })
 
-//// Save our game interval to a variable so we can stop it when we want to
-// This interval runs the game loop every 60 ms till we tell it to stop. Going to 30 seems faster visually. 60 is too easy to start.
-//Game loop 20 works well but need to change other speeds then to start it fair for player
-const gameInterval = setInterval(gameLoop, 40)
-
-// Function to stop game loop
-const stopGameLoop = () => {
-    clearInterval(gameInterval)
-    console.log('i stopped the game loop successfully')
-}
-
 // Try setting up new function to use in restart button.
 // didnt work, neverending loop, maybe thinks ball still at bottom. 
 //const startGameLoopAgain = () => setInterval(gameLoop, 40)
@@ -515,14 +521,33 @@ restartBoard.addEventListener('click', function () {
         // if (counterForLives === 0) {
         //     window.location.replace("endPage.html")
         // }
-        ctx.clearRect(0, 0, gameBoard.width, gameBoard.height)
+        //resets ball to correct spot but sends it flying and twice the speed
+
         gameInterval()
 
+
 })
+
+//// Save our game interval to a variable so we can stop it when we want to
+// This interval runs the game loop every 60 ms till we tell it to stop. Going to 30 seems faster visually. 60 is too easy to start.
+//Game loop 20 works well but need to change other speeds then to start it fair for player
+const gameInterval = () => {
+    setInterval(gameLoop, 40)
+    console.log('loop is working')
+}
+
+// Function to stop game loop
+const stopGameLoop = () => {
+    clearInterval(gameInterval)
+
+}
+
+
+
 
 // Add an event listener, when DOM loads, run the game on an interval
 document.addEventListener('DOMContentLoaded', function () {
     // here is our game loop interval
-    gameInterval
+    gameInterval()
     message.textContent = 'PRESS UP ARROW TO START'
 })
