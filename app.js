@@ -10,6 +10,8 @@
 // Some bonus features. 1) Player has multiple lives. 2) High scores are stored and maybe listed. 3) Computer has a moving paddle. 4) After many levels beat, another ball or two appear to increase difficulty. 
 /////////////////  END RULES //////////////
 
+
+
 //////////// SETUP COMPONENTS ///////////////
 
 // Grab some HTML elements for reference. Name them properly!!
@@ -39,6 +41,8 @@ levelCount.innerHTML = 1
 /// Setup variable for lives. Start at three. Go down one every restart. Figure out way to end at zero.
 const livesCount = document.getElementById('livescount')
 livesCount.innerHTML = 3
+
+counterForLives = 3
 
 /// FOR END GAME. just need to use this code to send to the end game screen after all lives are lost or when they lose regardless
 /// setup a life counter
@@ -146,7 +150,6 @@ class Paddle {
 }
 
 
-
 class Ball {
     constructor(x, y, width, height, color) {
         this.x = x
@@ -235,15 +238,32 @@ class Ball {
                 //// need to stop the ball right when bottom is hit, for visual reality look
                 if (this.y + this.height >= gameBoard.height) {
                     this.y = gameBoard.height - this.height
-                    message.textContent = 'GAME OVER. You scored ' + counterForScore + ' points'
+                    message.textContent = 'Life lost, you have ' + counterForScore + ' points. Press UP to start'
                     //try giving x a zero immediately. zero lets it show bottom right. negative 50 makes it disappear
-                    this.x = -50
                     
                     
+                    
+                    stopGameLoop()
+
+                    ballOne.x = 400
+                    ballOne.y = 50
+                    
+                    this.direction = {
+
+                        ///add in a diagonal. down/right to start
+                        diagDownRight: false,
+                        diagUpRight: false,
+                        diagDownLeft: false,
+                        diagUpLeft: false
+                    }
+                    this.y -= this.speed
+                    this.x += this.speedX
+
                     /// not working. maybe place outside loop
                     /// need restart function first. when player loses, goes again, loses a life
                     //livesCount = livesCount - 1
                     //console.log(livesCount)
+                   
                     /// send page to end page when player has zero lives. Need to setup a life counter. then go down to zero. then this fires. 
                     // TURN OFF END PAGE FOR NOW, TESTING NEW LOOPS
                     //window.location.replace("endPage.html")
@@ -265,12 +285,29 @@ class Ball {
                 //// need to stop the ball right when bottom is hit, for visual reality look
                 if (this.y + this.height >= gameBoard.height) {
                     this.y = gameBoard.height - this.height
-                    message.textContent = 'GAME OVER. You scored ' + counterForScore + ' points'
+                    message.textContent = 'Life lost, you have ' + counterForScore + ' points. Press UP to start'
                     //try giving x a zero immediately. zero lets it show bottom right. negative 50 makes it disappear
-                    this.x = -50
+                    
                     
                     /// not working yet
                     //livesCount = livesCount - 1
+                    stopGameLoop()
+
+                    ballOne.x = 400
+                    ballOne.y = 50
+
+                    this.direction = {
+
+                        ///add in a diagonal. down/right to start
+                        diagDownRight: false,
+                        diagUpRight: false,
+                        diagDownLeft: false,
+                        diagUpLeft: false
+                    }
+                    this.y -= this.speed
+                    this.x += this.speedX
+                    
+                    
                     //console.log(livesCount)
                     // TURN OFF END PAGE FOR NOW, TESTING NEW LOOPS
                     //window.location.replace("endPage.html")
@@ -352,8 +389,6 @@ const player = new Paddle(360, 335, 145, 14, 'black')
 const ballOne = new Ball(400, 50, 15, 12, 'black')
 
 
-
-
 /////    COLLISION  DETECTION ///////////
 
 
@@ -376,11 +411,9 @@ const detectHit = (thing) => {
         // has a new direction on a hit
         // this worked. need to reverse for any direction
         ballOne.reverseDirection()
-        
 
         //change the status box
-        message.textContent = 'WOW you are doing so good, on the first level'
-
+        message.textContent = 'Good job, but the first level is EASY'
 
         // Add to score counter
         // Counter starts at zero. Adds 1 here each time hits paddle. Only Goes up locally. Start at zero when reset/save. Posts in the inner HTML of that box. And also posts in message board when game ends. 
@@ -419,7 +452,7 @@ const detectHit = (thing) => {
             levelCount.innerHTML = counterForLevel + 2
             ballOne.speed = 24
             message.textContent = 'Things just got super fast'
-        }
+        }  
     }    
 }
 
@@ -470,35 +503,42 @@ document.addEventListener('keyup', (e) => {
     }
 })
 
-//// Save our game interval to a variable so we can stop it when we want to
-// This interval runs the game loop every 60 ms till we tell it to stop. Going to 30 seems faster visually. 60 is too easy to start.
-const gameInterval = setInterval(gameLoop, 40)
-// Function to stop game loop
-const stopGameLoop = () => {clearInterval(gameInterval)}
-
-
-
-
-// Add an event listener, when DOM loads, run the game on an interval
-document.addEventListener('DOMContentLoaded', function () {
-    // here is our game loop interval
-    gameInterval
-    message.textContent = 'PRESS UP ARROW TO START'
-})
-
+// Try setting up new function to use in restart button.
+// didnt work, neverending loop, maybe thinks ball still at bottom. 
+//const startGameLoopAgain = () => setInterval(gameLoop, 40)
 
 // Try creating a reset or start button to test out restarting after losing a life. Id is resetButton
 // One crude way is to just have a restart button on the page that reloads the page. But that resets the score and level as well. 
 // This only flashes the new message. Does not fully restart the board. 
 // Not totally working. Got message to change. loop to stop. but cant get it going again.
-counterForLives = 3
-const restartBoard = document.getElementById('resetButton')
+// counterForLives = 3
+// const restartBoard = document.getElementById('resetButton')
 
-// Restart button is taking a life but is not restarting the ball in correct position
-restartBoard.addEventListener('click', function () {
-    stopGameLoop()
-    message.textContent = 'LOST LIFE, PRESS UP TO START AGAIN'
-    gameInterval
+// // Restart button is taking a life but is not restarting the ball in correct position
+// restartBoard.addEventListener('click', function () {
+//     //stopGameLoop()
+//     // message.textContent = 'LOST LIFE, PRESS UP TO START AGAIN'
+    
+//     console.log('trying to restart game with this button')
+        
+//         //resets ball to correct spot but sends it flying and twice the speed
+
+//         gameInterval()
+
+
+// })
+
+//// Save our game interval to a variable so we can stop it when we want to
+// This interval runs the game loop every 60 ms till we tell it to stop. Going to 30 seems faster visually. 60 is too easy to start.
+//Game loop 20 works well but need to change other speeds then to start it fair for player
+const gameInterval = () => {
+    setInterval(gameLoop, 40)
+    console.log('loop is working')
+}
+
+// Function to stop game loop
+const stopGameLoop = () => {
+    clearInterval(gameInterval)
         // Take from  lives counter
         // Counter starts at three. Takes 1 here each time hits bottom. Posts in the inner HTML of that box. 
         livesCount.innerHTML = counterForLives - 1
@@ -506,4 +546,15 @@ restartBoard.addEventListener('click', function () {
         if (counterForLives === 0) {
             window.location.replace("endPage.html")
         }
+
+}
+
+
+
+
+// Add an event listener, when DOM loads, run the game on an interval
+document.addEventListener('DOMContentLoaded', function () {
+    // here is our game loop interval
+    gameInterval()
+    message.textContent = 'PRESS UP ARROW TO START'
 })
