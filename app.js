@@ -254,6 +254,8 @@ class Ball {
                         diagDownLeft: false,
                         diagUpLeft: false
                     }
+                    this.y -= this.speed
+                    this.x += this.speedX
 
                     /// not working. maybe place outside loop
                     /// need restart function first. when player loses, goes again, loses a life
@@ -300,6 +302,8 @@ class Ball {
                         diagDownLeft: false,
                         diagUpLeft: false
                     }
+                    this.y -= this.speed
+                    this.x += this.speedX
                     
                     
                     //console.log(livesCount)
