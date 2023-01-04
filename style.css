@@ -2,23 +2,12 @@ body {
     background-color: green;
     font-family: 'Press Start 2P', cursive;
 }
-h1 {
+#gameHeader {
     text-align: center;
     font-size: 128px;
     margin: 15px 50px;
 }
-#wholeStartBody {
-    width: 100vw;
-    height: 100vh;
-}
-#wholeGameBody {
-    width: 100vw;
-    height: 100vh;
-}
-#wholeEndBody {
-    width: 100vw;
-    height: 100vh;
-}
+
 canvas {
     background-color: lightgray;
     width: 100%;
@@ -153,4 +142,24 @@ main {
       width: 100px;
       border: 2px solid black;
       cursor: pointer;
+    }
+
+    #endHeader {
+        text-align: center;
+        font-size: 125px;
+        margin: 45px 50px;
+    }
+    #endButton {
+        height: 100px;
+        width: 400px;
+        text-align: center;
+        font-size: 50px;
+        margin: 40px 600px;
+        background-color: lightgray;
+        cursor: pointer;
+        border-radius: 15px;
+        box-shadow: 0 9px #999;
+        outline: none;
+        border: 2px solid grey;
+        font-family: 'Press Start 2P', cursive;
     }

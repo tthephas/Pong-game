@@ -547,7 +547,8 @@ const stopGameLoop = () => {
 
 
         if (counterForLives === 0) {
-            window.location.replace("endPage.html")
+            document.getElementById("wholeGameBody").style.display = 'none'
+            document.getElementById("wholeEndBody").style.display = ''
         }
 
 }
@@ -561,11 +562,22 @@ const stopGameLoop = () => {
 // Add an event listener, when DOM loads, run the game on an interval
 document.addEventListener('DOMContentLoaded', function () {
     // here is our game loop interval
-    // gameInterval()
-    // message.textContent = 'PRESS UP ARROW TO START'
+    gameInterval()
+    message.textContent = 'PRESS UP ARROW TO START'
 
     document.getElementById("wholeStartBody").style.display = ''
     document.getElementById("wholeGameBody").style.display = 'none'
     document.getElementById("wholeEndBody").style.display = 'none'
 
 })
+
+// Start page functions
+/// Make a pop up function for the instructions. When a user hits the button, a pop up comes up and tells the user how to play
+
+const popUpInstructions = () => {
+    document.getElementById("myInstructions").style.display = "block";
+  }
+  
+  function closeForm() {
+    document.getElementById("myInstructions").style.display = "none";
+  }

@@ -6,12 +6,12 @@ body {
     width: 100vw;
     height: 100vh;
 }
-h1 {
+#endHeader {
     text-align: center;
     font-size: 148px;
     margin: 45px 50px;
 }
-button {
+#endButton {
     height: 100px;
     width: 400px;
     text-align: center;
