@@ -12,8 +12,8 @@
 <body >
 <div id="wholeStartBody">
     <h1 id="startHeader">WELCOME TO PONG</h1>
-    <div id="startButton" class="allButtons"> 
-        <button class="instructions" onclick="popUpInstructions()">Instructions</button>
+    <div> 
+        <button id="startButton" class="instructions" onclick="popUpInstructions()">Instructions</button>
         <div class="instructions-popup" id="myInstructions">
             <form action="/action_page.php" class="instructions-container">
               <h3>Start ball moving by pressing the UP arrow <br><br>
@@ -26,9 +26,9 @@
             </form>
         </div>  
     </div>
-    <div id="startButton" class="allButtons">
+    <div>
         
-        <button class="startGame" onclick="goToGamePage()">Start Game</button> 
+        <button id = "startButton" class="startGame" onclick="goToGamePage()">Start Game</button> 
         
     </div>
 
@@ -66,9 +66,9 @@
 
 <div id="wholeEndBody">
     <h1 id="endHeader">GAME OVER</h1>
-    <div id="endButton" class="allButtons">
+    <div>
         
-        <button class="startGame" onclick="goToGamePage()">Play Again</button> 
+        <button id="endButton" class="startGame" onclick="goToGamePage()">Play Again</button> 
         
     </div>
 </div>
