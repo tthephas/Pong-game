@@ -7,13 +7,14 @@
     <title>Pong</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<!-- /* put the start div here */ -->
+
+<!-- /* put the start page div here */ -->
 
 <body >
 <div id="wholeStartBody">
     <h1 id="startHeader">WELCOME TO PONG</h1>
-    <div id="startButton" class="allButtons"> 
-        <button class="instructions" onclick="popUpInstructions()">Instructions</button>
+    <div> 
+        <button id="startButton" class="instructions" onclick="popUpInstructions()">Instructions</button>
         <div class="instructions-popup" id="myInstructions">
             <form action="/action_page.php" class="instructions-container">
               <h3>Start ball moving by pressing the UP arrow <br><br>
@@ -26,10 +27,10 @@
             </form>
         </div>  
     </div>
-    <div id="startButton" class="allButtons">
-        <a href="index.html">
-        <button class="startGame">Start Game</button> 
-        </a>
+    <div>
+        
+        <button id = "startButton" class="startGame" onclick="goToGamePage()">Start Game</button> 
+        
     </div>
 
     
@@ -66,10 +67,10 @@
 
 <div id="wholeEndBody">
     <h1 id="endHeader">GAME OVER</h1>
-    <div id="endButton" class="allButtons">
-        <a href="index.html">
-        <button class="startGame">Play Again</button> 
-        </a>
+    <div>
+        
+        <button id="endButton" class="startGame" onclick="goToGamePage()">Play Again</button> 
+        
     </div>
 </div>
 <script src="app.js"></script>

@@ -565,8 +565,8 @@ document.addEventListener('DOMContentLoaded', function () {
     gameInterval()
     message.textContent = 'PRESS UP ARROW TO START'
 
-    document.getElementById("wholeStartBody").style.display = 'none'
-    document.getElementById("wholeGameBody").style.display = ''
+    document.getElementById("wholeStartBody").style.display = ''
+    document.getElementById("wholeGameBody").style.display = 'none'
     document.getElementById("wholeEndBody").style.display = 'none'
 
 })
@@ -578,6 +578,12 @@ const popUpInstructions = () => {
     document.getElementById("myInstructions").style.display = "block";
   }
   
-  function closeForm() {
+function closeForm() {
     document.getElementById("myInstructions").style.display = "none";
-  }
+}
+
+const goToGamePage = () => {
+    document.getElementById("wholeStartBody").style.display = 'none'
+    document.getElementById("wholeGameBody").style.display = ''
+    document.getElementById("wholeEndBody").style.display = 'none'
+}
